@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Exploration</title>
+
+    <style>
+        h1
+        {
+            text-align: center;
+        }
+        #mycanvas
+        {
+            border: 2px solid black;
+            display: block;
+            margin: auto;
+        }
+        #buttonholder
+        {
+            background-color: red;
+            width: 300px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        button
+        {
+            margin: .5rem;
+            padding: .5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Canvas Exploration 2</h1>
+
+    <canvas id="mycanvas"></canvas>
+    <div id="buttonholder">
+        <button id="createline" onclick="window.alert('create line')">Create Line</button>
+        <button id="createrectangle" onclick="window.alert('create rectangle')">Create Rectangle</button>
+        <button id="createtriangle" onclick="window.alert('create triangle')">Create Triangle</button>
+        <button id="createarc" onclick="window.alert('create arc')">Create Arc</button>
+        <button id="createstar" onclick="window.alert('create star')">Create Star</button>
+        <button id="undodraw" onclick="window.alert('undo')">Undo</button>
+    </div>
+
+    <script>
+        // Create Variables
+        const canvas = window.document.querySelector('#mycanvas');
+        // window.alert(canvas);
+
+        // Give canvas drawing powers
+        const ctx = canvas.getContext('2d');
+
+        // Configure canvas
+        canvas.width = 800;
+        canvas.height = 800;
+        canvas.style.backgroundColor = 'lightblue';
+        
+        // Add Event Listeners
+        // Create variables for buttons
+        // Create Line
+        const btnCreateLine = window.document.querySelector('#createline');
+        btnCreateLine.style.backgroundColor = 'red';
+        btnCreateLine.addEventListener('click', function(){
+            // window.alert('CreateLine');
+        // Select a strije style - color
+        ctx.strokestyle = "black";
+        ctx.linewidth = 15;
+        ctx.lineCap = "butt"; // butt or round or square
+        ctx.lineJoin = "miter" // bevel or miter
+
+        // Draw the line
+        ctx. beginPath();
+        ctx.moveTo(15, 15);
+        ctx.lineTo(200, 200);
+        ctx.lineTo(15, 385);
+        ctx.stroke();
+
+        };
+    )
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smiley Face</title>
+</head>
+<body>
+    <h1>Smiley Face</h1>
+    <canvas id="canvasone"></canvas>
+    <script>
+        // Create canvas
+        const canvasOne = window.document.querySelector('#canvasone');
+        const ctx = canvasOne.getContext('2d');
+
+        // Configure Canvas
+        canvasOne.width = 1000;
+        canvasOne.height = 800;
+        canvasOne.style.border = '1px solid black';
+
+        // Draw Circle
+        ctx.strokeStyle = 'yellow';
+        ctx.lineWidth = 45;
+        ctx.fillStyle ='yellow';
+
+        ctx.beginPath();
+        ctx.arc(500, 200, 100, 0, Math.PI * 2, false);
+        ctx.stroke();
+        ctx.fill();
+
+        // Draw Mouth
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 5;
+        ctx.fillStyle ='black';
+
+        ctx.beginPath();
+        ctx.arc(500, 200, 100, 0, 3.14, false);
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 8;
+        ctx.fillStyle ='white';
+
+        ctx.beginPath();
+        ctx.arc(500, 207, 85, 0, 3.14, false);
+        ctx.stroke();
+        ctx.fill();
+
+        // Draw Eyes
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 5;
+        ctx.fillStyle ='black';
+
+        ctx.beginPath();
+        ctx.arc(425, 160, 18, 0, Math.PI * 2, false);
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 5;
+        ctx.fillStyle ='black';
+
+        ctx.beginPath();
+        ctx.arc(575, 160, 18, 0, Math.PI * 2, false);
+        ctx.stroke();
+        ctx.fill();
+    </script>
+</body>
+</html>
