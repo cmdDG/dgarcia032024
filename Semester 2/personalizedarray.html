@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Array</title>
+</head>
+<body>
+    <h1>Arrays</h1>
+    <script>
+        // Arrays
+        // Cycle through Array elements
+
+        let myCrystals;
+        myCrystals = [] // Blank Array
+
+        // Assign values to array
+        myCrystals[1] = "Diamond" // index 1
+        myCrystals[2] = "Gold" // index 2
+        myCrystals[3] = "Lapis" // index 3
+        myCrystals[4] = "Amethyst" // index 4
+        myCrystals[5] = "Aquamarine" // index 5
+        myCrystals[6] = "Jasper" // index 6
+        myCrystals[7] = "Quartz" // index 7
+        myCrystals[8] = "Moonstone" // index 8
+        myCrystals[9] = "Agate" // index 9
+
+        // Display
+        window.document.write(myCrystals);
+
+        // Manipulate the array
+        myCrystals.push("Emerald");
+
+        // Display
+        console.log(myCrystals);
+
+        // Correct error
+        myCrystals.pop(); // Delete Fido
+        myCrystals.shift(); // Delete Fluffy
+
+        // Manipulate the array
+        myCrystals.unshift('Iron');
+
+        // Display # of the elements in an array
+        console.log(myCrystals.length);
+
+        // Multi line comment - Notes
+        // forEach allows you to cycle through an Array
+        myCrystals.forEach( function(crystal, index)
+        {
+            console.log(index + " " + crystal);
+        }   );
+    </script>
+</body>
+</html>

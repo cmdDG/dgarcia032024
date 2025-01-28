@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Object</title>
+    <style>
+        #myDiv
+        {
+            width: 200px;
+            height: 200px;
+            background-color: crimson;
+            margin: auto;
+            color: white;
+            font-size: 32px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Event Object</h1>
+
+    <div id="myDiv">
+
+    </div>
+    <script>
+
+        let myDiv; // Create variable
+        myDiv = window.document.querySelector('#myDiv');
+
+        // The Event Object
+        window.document.addEventListener('mousemove',function(e)
+        {
+            // window.alert("clicked");
+            // console.log("e.y");
+            myDiv.style.backgroundColor="crimson";
+            myDiv.innerHTML = "x=" + e.x    +   "<br> y=" + e.y;
+        }  
+    );
+        window.document.addEventListener('click', function(e)
+        {
+            myDiv.style.backgroundColor="blue";
+            myDiv.innerHTML = "x=" + e.x    +   "<br> y=" + e.y;
+        }
+    );
+    </script>
+</body>
+</html>
