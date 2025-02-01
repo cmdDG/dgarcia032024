@@ -3,31 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garcia Diego</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
+    <title>Diego Garcia Portfolio</title>
     <style>
         body
         {
             background-color: black;
         }
-        a:link {
-          color: red;
-          background-color: transparent;
-          text-decoration: none;
+        /* Style tab links */
+        .tablink {
+        background-color: black;
+        color: white;
+        float: right;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 10px;
+        font-size: 15px;
+        width: 7%;
         }
-        a:hover {
-          background-color: transparent;
+
+        /* Style the tab content (and add height:100% for full page content) */
+        .tabcontent {
+        color: black;
+        display: none;
+        padding: 30px 20px;
+        height: 100%;
         }
-        .container
-        {
+
+        /*Playlist Style*/
+        .playlist {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .playlist li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
             background-color: none;
-            min-height: 10rem;
-            max-width: 120rem;
-            margin: auto;
-            padding: 1rem 3rem 1rem 3rem;
-            position: relative;
+            border: 1px solid #d1af47;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .playlist li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .cover-art {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .playlist li div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .song-length {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .current-song {
+            color: #014421;
+            font-weight: bold;
         }
         #pageheader
         {
@@ -41,14 +88,6 @@
         #background
         {
             background-size: cover;
-        }
-        #logo
-        {
-            background-color: none;
-            height: 240px;
-            width: 240px;
-            margin: auto;
-            transition: all 2s;
         }
         #media
         {
@@ -87,210 +126,32 @@
             background-color: black;
             padding: 1rem;
         }
-        .wrapper
-        {
-            position: relative;
-            overflow: hidden;
-            padding-top: 56.25%;
-        }
-        .wrapper iframe
-        {
-            position: absolute;
-            top: 0%;
-            left: 0%;
-            width: 100%;
-            height: 100%;
-        }
-        .responsive
-        {
-            width: 100%;
-            height: auto;
-        }
-        /* Set height of body and the document to 100% to enable "full page tabs" */
-        body, html {
-            height: 100%;
-            margin: 0;
-            font-family: Arial;
-        }
-
-        /* Style tab links */
-        .tablink 
-        {
-            background-color: #555;
-            color: white;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            font-size: 17px;
-            width: 25%;
-        }
-
-        .tablink:hover 
-        {
-            background-color: #777;
-        }
-
-        /* Style the tab content (and add height:100% for full page content) */
-        .tabcontent {
-            color: white;
-            display: none;
-            padding: 100px 20px;
-            height: 100%;
-        }
-
-        #Home 
-        {
-            background-color: black;
-        }
-        #Music 
-        {
-            background-color: green;
-        }
-
-        #Contact 
-        {
-            background-color: blue;
-        }
-        #About 
-        {
-            background-color: orange;
-        }
-        .column
-        {
-            margin:auto;
-            display:flex;
-            flex-direction: row;
-            background-color:red;
-            flex-wrap: wrap;
-            border: 10px solid cyan;
-            justify-content: center
-        }
-        #pageheaderimage
-        {
-            opacity: 40%;
-        }
-        #chicano a:link
-        {
-            columns: white;
-            text-decoration: none;
-        }
-        #chicano a:visited
-        {
-            columns: lightblue;
-            text-decoration: none;
-        }
-        #pfp img
-        {
-            width: 250px;
-            height: 250px;
-        }
-
-        /* Media Queries */
-        @media only screen and (min-width:320px)
-        {
-            #pageheader
-            {
-                min-height: auto;
-            }
-            #pagecontent
-            {
-                background-color: magenta;
-            }
-        }
-        @media only screen and (min-width:480px)
-        {
-            #pagecontent
-            {
-                background-color: yellow;
-            }
-        }
-        @media only screen and (min-width:768px)
-        {
-            #pagecontent
-            {
-                background-color: lime;
-            }
-        }
-        
-        @media only screen and (min-width:1024px)
-        {
-            #pagecontent
-            {
-                background-color: coral;
-            }
-
-            #pagenav
-                {
-                top: 0px;
-                right: 0px;
-                left: auto;
-                bottom: auto;
-            }
-        }   
-            @media only screen and (min-width:1200px)
-            {
-                #pagecontent{
-                    background-color: steelblue;
-                }
-                #pagenav
-                {
-                top: 0px;
-                right: 0px;
-                left: auto;
-                bottom: auto;
-            }
-        }
     </style>
-</head>   
+</head>
 <body>
-    
-    <button class="tablink" onclick="openPage('Home', this, 'red')" id="defaultOpen">Home</button>
+    <!-- Start Tabs -->
+    <button class="tablink" onclick="openPage('Classroom', this, 'pink')" id="">Classroom</button>
     <button class="tablink" onclick="openPage('Albums', this, 'green')">Albums</button>
-    <button class="tablink" onclick="openPage('Classroom', this, 'blue')">Classroom</button>
-    <button class="tablink" onclick="openPage('About', this, 'orange')">About</button>
-    <button class="tablink" onclick="openPage('Chicano', this, 'yellow')">Chicano Culture</button>
+    <!-- <button class="tablink" onclick="openPage('About', this, 'orange')">About</button> -->
     <button class="tablink" onclick="openPage('Playlist', this, 'purple')">Playlist</button>
-<!-- <button class="tablink" onclick="openPage('Artists', this, 'lightblue')">Artists</button> -->
+    <button class="tablink" onclick="openPage('Media', this, 'blue')" id="">Media</button>
+    <button class="tablink" onclick="openPage('Home', this, 'red')" id="defaultOpen">Home</button>
+    <!-- End Tabs -->
 
-<div id="Home" class="tabcontent">
-    <!-- begin pageheader -->
+    <!-- Start Home Tab -->
+    <div id="Home" class="tabcontent">
+        <!-- begin pageheader -->
     <header id="pageheader">
         <div id="logo">
-            <img src="Images/logo.png" alt="logo" class="responsive image1">
+            <a href="https://stupendous-capybara-4ff9b2.netlify.app/?scrlybrkr=2f5a8d33" target="_blank">
+                <img src="Images/logo.png" alt="logo" style="width: 360px; height: 360px; margin: auto;">
+            </a>
             
-            </div>
-            <div id="background1">
-                <img src="Images/pghead.png" alt="header">
             </div>
             
     </header>
     <!-- end header -->
 
-    <!-- begin showcase -->
-    <section id="media">
-
-        
-        <div class="wrapper">
-            <iframe style="" src="https://www.youtube.com/embed/sGMrMx_uY0w?si=VKFk9TCNV6VxyT05" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
-        </section>
-    <!-- end showcase -->
-
-    
-    <!-- begin pagecontent -->
-    <main id="pagecontent">
-        <h2>Introduction</h2>
-        <h3>
-            Welcome to my portforlio, 
-
-            My name is Diego Garcia, I've been taking Web Page for the past 2 years. My favorite subject is Fitness & Weight Training because I get to improve my physical strength and focus on myself more better with the equipments provided. It motivates me to do better and be the better version of myself, it also helps wake me up in the morning when I'm not in the right mood. Other things I do in my free time is listen to music, greate graphics in PhotoShop, write music, and do 30 minutes of cardio in my room daily.
-        </h3>
-        <div class="container"></div>
-    </main>
-    <!-- end pagecontent -->
-    
     <!-- begin features -->
     <section id="career">
         career
@@ -303,7 +164,22 @@
     <!-- begin semesters -->
     <section id="semesters">
 
-        semesters
+        Semester 2
+        <!-- begin assignment list -->
+        <ul>
+            <li>
+                <a href="Projects/paintingappv3test.html" style="color: white;">Painting App</a>
+            </li>
+            <li>
+                <a href="Semester 2/personalizedarray.html" style="color: white;">Personalized Array</a>
+            </li>
+            <li>
+                <a href="Semester 2/ClassNotesMarkDown4.md" style="color: white;">Markdown 4</a>
+            </li>
+            <li>
+                <a href="Semester 2/ClassNotesMarkDown5.md" style="color: white;">Markdown 5</a>
+            </li>
+        </ul>
 
         <div class="container"></div>
     </section>
@@ -325,41 +201,63 @@
             
     </footer>
 </div>
+    </div>
+    
+    <!-- End Home Tab -->
 
+    <!-- Start Media Tab -->
+<div id="Media" class="tabcontent">
+
+    <!-- <h1 style="color: white; text-align: center;">Movies</h1>
+    <img src="Images/MovieArt/Tokyo.png" alt="TokyoDrift" style="width: 270px; height: 524px;">
+    <img src="Images/MovieArt/Compton.png" alt="Compton" style="width: 270px; height: 524px;">
+    <img src="Images/MovieArt/poster5.png" alt="IntoSpider" style="width: 270px; height: 524px;">
+    <img src="Images/MovieArt/poster3.png" alt="SpiritedAway" style="width: 270px; height: 524px;">
+    <h1 style="color: white; text-align: center;" >Shows</h1> -->
+    <!-- 
+    Arcane
+    Initial D
+    Boondocks
+    Scott Piglrim Vs the World]
+    -->
+</div>
+    <!-- End Media Tab -->
+
+
+    <!-- Start Classroom Tab -->
+
+<div id="Classroom" class="tabcontent">
+    <h1 style="color: white;">Aeries Grades</h1>
+  <p style="color: white;">Will be updated overtime</p>
+  <iframe src="https://coalingahuron.aeries.net/" width="1390px" height="1000px"></iframe>
+  
+</div>
+
+    <!-- End Classroom Tab -->
+
+
+    <!-- Begin Albums Tab -->
 <div id="Albums" class="tabcontent">
     <h1 class="headline" style="color: white;">"Without Music, Life Would Be A Mistake" - Friedrich Nietzsche</h1>
-    <p>These are some of the albums I enjoy listening to, feel free to check them out.</p>
+    <p style="color: white;">These are some of the albums I enjoy listening to, feel free to check them out.</p>
     <h3>Albums:</h3>
-    <!-- Columns -->
-    
-        <div class="column">
-                    <a href="https://open.spotify.com/album/4eLPsYPBmXABThSJ821sqY?scrlybrkr=2f5a8d33">
-                        <img src="Images/DAMN.png" alt="DAMN" >
-                    </a>
-            <a href="https://open.spotify.com/album/6zaisPwfcIAfdUGPj3mmGY?scrlybrkr=2f5a8d33">
-                <img src="Images/NF.png" alt="HOPE" >
+            <a href="https://open.spotify.com/album/2MDU46hcBn3u94s46BOSdv">
+                <img src="Images/Popsmoke.png" alt="SHOOTFORTHESTARSAIMFORTHEMOONDELUXE">
             </a>
-                    <a href="https://open.spotify.com/album/2MDU46hcBn3u94s46BOSdv">
-                        <img src="Images/Popsmoke.png" alt="SHOOTFORTHESTARSAIMFORTHEMOONDELUXE"  class="responsive">
-                    </a>
-                
             <a href="https://open.spotify.com/album/0ZjOFfItjIA9YbzhERRIBr?scrlybrkr=2f5a8d33">
-                <img src="Images/SLEEP.png" alt="STILLSLEEPDELUXE"  class="responsive">
+                <img src="Images/SLEEP.png" alt="STILLSLEEPDELUXE">
             </a>
-                    <a href="https://open.spotify.com/album/2x6s7ooABaADFz7ZTbuAMG?scrlybrkr=2f5a8d33">
-                        <img src="Images/MOSDEF.png" alt="THEECSTATIC"  class="responsive">
-                </a>
+            <a href="https://open.spotify.com/album/2x6s7ooABaADFz7ZTbuAMG?scrlybrkr=2f5a8d33">
+                <img src="Images/MOSDEF.png" alt="THEECSTATIC">
+            </a>
             <a href="https://open.spotify.com/album/3Xvvi8uwGnuj9nF7fr2h39?scrlybrkr=2f5a8d33">
-                <img src="Images/SHEFF.png" alt="THEUNLUCCYLUCCYKID" class="responsive">
+                <img src="Images/SHEFF.png" alt="THEUNLUCCYLUCCYKID">
             </a>
-                    <a href="https://open.spotify.com/album/7MXxt6ult07PrDraCxb5EK?scrlybrkr=2f5a8d33">
-                        <img src="Images/BLXST.png" alt="ILLALWAYSCOMEFINDYOU"  class="responsive">
-                    </a>
-            <a href="https://open.spotify.com/album/2Ti79nwTsont5ZHfdxIzAm?scrlybrkr=2f5a8d33">
-                <img src="Images/XXX.png" alt="QUESTIONMARK" class="responsive">
+            <a href="https://open.spotify.com/album/7MXxt6ult07PrDraCxb5EK?scrlybrkr=2f5a8d33">
+                <img src="Images/BLXST.png" alt="ILLALWAYSCOMEFINDYOU">
             </a>
             <a href="https://open.spotify.com/album/4SZko61aMnmgvNhfhgTuD3">
-                <img src="Images/KANYE.png" alt="GRAD" class="responsive">
+                <img src="Images/KANYE.png" alt="GRAD">
             </a>
             <a href="https://open.spotify.com/album/0UMMIkurRUmkruZ3KGBLtG">
                 <img src="Images/JCOLE.png" alt="COLE">
@@ -367,17 +265,8 @@
             <a href="https://open.spotify.com/album/3KRqTwjYtuR11MnyM3X2xL">
                 <img src="Images/TJ.png" alt="TJ">
             </a>
-            <a href="https://open.spotify.com/album/7tNVYWQ7it7YbQLGVOrGFJ">
-                <img src="Images/DRILLY.png" alt="DRILLY">
-            </a>
             <a href="https://open.spotify.com/album/6idVoBWP2mt1qoMtASm3gc">
                 <img src="Images/CURRY.png" alt="CURRY">
-            </a>
-            <a href="https://open.spotify.com/album/6fKx0UeCduyu1piUvBZJqg">
-                <img src="Images/FLOCK.png" alt="DOA">
-            </a>
-            <a href="https://open.spotify.com/album/6tkjU4Umpo79wwkgPMV3nZ">
-                <img src="Images/JUICE.png" alt="WRLD">
             </a>
             <a href="https://open.spotify.com/album/07w0rG5TETcyihsEIZR3qG">
                 <img src="Images/SZA.png" alt="SOS">
@@ -406,124 +295,224 @@
             <a href="https://open.spotify.com/album/3kEtdS2pH6hKcMU9Wioob1">
                 <img src="Images/NAS.png" alt="NAS">
             </a>
-            <a href="https://open.spotify.com/album/7D59qIBeJucYHLc1Kq6i69">
-                <img src="Images/FTCAN.png" alt="CAN">
-            </a>
             <a href="https://open.spotify.com/album/3AxYGUXCG9OmZT5fiRAwJi">
                 <img src="Images/SOUTHEAST.png" alt="SLOBE">
             </a>
-            <a href="https://open.spotify.com/album/3P7EIeXmzJQNT1xs4Q6Xzd">
-                <img src="Images/PRESIDENT.png" alt="PRESIDENT">
+            <a href="https://open.spotify.com/album/6LU7SYL9BWAt3TgEK4DdAc">
+                <img src="Images/bigx.png" alt="BIGX">
             </a>
-            <a href="https://open.spotify.com/album/7lEj90UqCHkiZzLnOOQV2v">
-                <img src="Images/JIGGY.png" alt="SHAEK">
+            <a href="https://open.spotify.com/album/7KSf6p0G0mZd7j60etVTwT">
+                <img src="Images/HallOfFame.png" alt="HALLOFFAME">
             </a>
-        </div>
 </div>
+<!-- End Albums Tab -->
 
-<div id="Classroom" class="tabcontent">
-    <h1>Aeries Grades</h1>
-  <p>Will be updated overtime</p>
-  <iframe src="https://coalingahuron.aeries.net/" width="1390px" height="1000px"></iframe>
-  
-</div>
-
-<div id="About" class="tabcontent">
-  <h1>About Me</h1>
-  <h3>
-    I am a songwriter, artist, graphic designer, moderate businessman
-  </h3>
-</div>
-<div id="Chicano" class="tabcontent">
-    <h1>Chicano</h1>
-    <h2>Chicano/Chicana means a first generation descendant of Mexican Immigrants into the United States. Most popular area for the culture being found is in Los Angeles, California.
-        Chicano Culture mixes "American" and "Mexican" culture, thus creating a hybrid of it. Central aspects include the Lowriding Culture, Graffiti, Hip-Hop & Funk music, Visual Art, Literacy, Poetry & More.
-        While most confuse Cholos with Chicanos, in LA, Chicanos can be more commonly found wearing Zoot Suits or older classy clothes with web belt and fadoras. While some more established figures wear more fancier clothes, majority (Including the 'Cholo/Chola') population
-        are often seen wearing workwear, whether is <a href="https://bendavis.com/" style="color: lightblue;">Ben Davis</a> or <a href="https://www.dickies.com/" style="color: lightblue;">Dickies</a>, they can also be found wearing a slightly more heavyweight clothes like <a href="https://fbcountyusa.com/?" style="color: lightblue;">FB County</a>,<a href="https://shopproclub.com/" style="color: lightblue;">Pro Club</a> or <a href="https://www.levi.com/US/en_US/" style="color: lightblue;">Levi's</a>. Some slightly more minor brands can be <a href="https://shakawear.com/?" style="color: lightblue;">Shaka Wear</a>, <a href="https://www.truereligion.com/" style="color: lightblue;">True Religion</a>, <a href="https://caltop1994.com/" style="color: lightblue;">CalTop</a>, <a href="https://www.nike.com/" style="color: lightblue;">Nike</a> and <a href="https://lowriderbrand.com/" style="color: lightblue;">Lowrider</a>.
-        While unfortunate that they both get mislabeled, Chicanos had a early movement back in the days of around WW2 where they tried protesting for better opportunities in Los Angeles. It still goes on with parades and protests. Not only that but late rapper <a href="https://en.wikipedia.org/wiki/Eazy-E" style="color: lightblue;">Eazy-E</a> helped form the early stages
-        of Chicano Rap, aiding <a href="https://en.wikipedia.org/wiki/Brownside" style="color: lightblue;">Toker Brownside</a> in forming it early. Other Chicano artists are <a href="https://www.last.fm/music/Cali+Life+Style/+wiki" style="color: lightblue;">Cali Life Style</a>, <a href="https://en.wikipedia.org/wiki/Lil_Rob" style="color: lightblue;">Lil Rob</a>, <a href="https://en.wikipedia.org/wiki/Frost_(rapper)" style="color: lightblue;">Frost</a>, etc. There's a quote that seperates the two labels from its already blurry line, "all cholos are chicano but not all chicanos are cholos."
-        With the common assumption of Cholos being labeled as the entire Chicano culture, they've resorted to wearing neutral colors such as Navy Blue, Burgundy, Black, White, Khaki, Purple, Dark Green, Olive Green, Monotone Colors or well blended complimentary colors. They also wear semi-vibrant
-        clothes to express themselves. Both do land in a common appreciation of freshly Ironed clothes, like Levi 501s, button ups, shirts, pants, shined and cleaned shoes, and representing where they come from and showing pride for what they stand for. Chicanos are more verbal in their pride, their most
-        popular events are Heritage Festivals, Lowrider parades whether its cruising around Los Angeles or sitting at a park BBQing or inside a stage display, theres Parties as well. Chicanos do the most to show pride to being Brown, for the Raza (the lord or the people) accepting their Mexican culture and expressing it
-        in the most colorful ways possible.
-    </h2>
-    <h1>Chicano Park in San Diego California & & El Pino (Chicano Tree) Los Angeles, California</h1> 
-    <iframe src="https://www.google.com/maps/embed?pb=!4v1727469049807!6m8!1m7!1sCAoSLEFGMVFpcE1LN0NYOE9Bdkk5OWZGc3BaY05xM0ZvZEx1ODQyWEdrTWRYQXhW!2m2!1d32.70023501858383!2d-117.143316077303!3f277.9764869524066!4f-1.150430487225293!5f0.7820865974627469" width="695" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    <iframe src="https://www.google.com/maps/embed?pb=!4v1727469201134!6m8!1m7!1s_BgaMcV0qAc3JuaFMBA_-w!2m2!1d34.04338889630164!2d-118.1923312927841!3f209.4327740315119!4f16.770213943524936!5f0.7820865974627469" width="695" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    <h1>Chicano Movies</h1>
-    <a href="https://en.wikipedia.org/wiki/Blood_In_Blood_Out">
-        <img src="Images/blood.png" alt="blood" style="margin: auto;">
-    </a>
-    <a href="https://en.wikipedia.org/wiki/American_Me">
-        <img src="Images/americanme.png" alt="american" style="margin: auto;">
-    </a>
-    <a href="https://en.wikipedia.org/wiki/Boulevard_Nights">
-        <img src="Images/nights.png" alt="nights" style="margin: auto;">
-    </a>
-    <a href="https://en.wikipedia.org/wiki/Stand_and_Deliver">
-        <img src="Images/stand.png" alt="stand" style="margin: auto;">
-    </a>
+<!-- Begin About Tab -->
+<!-- <div id="About" class="tabcontent">
     
-</div>
+    <h3 style="color:white">Hello, my name is Diego Garcia</h3>
+        <h1 style="color: white;">A little more about Me</h1>
+    <p style="color: white;">I've been taking Web Page for the past 2 years. My favorite subject is Fitness & Weight Training because I get to improve and focus on myself more better with the equipments provided, as well as being able to do it with the help of my friends in the same class. It motivates me to do better and be the better version of myself, it also helps wake me up in the morning when I'm not in the right mood. Other things I do is drawing, graphic design, and as of recently picking up writing and music production. I can confidently describe myself as someone with many interests. For now explore my web page for as long as you'd like. 
+        Welcome to my portforlio.</p>
+  </div> -->
+<!-- End About Tab -->
 
-<div id="Playlist">
-    <h2>
+<!-- Begin Playlist Tab -->
+<div id="Playlist" class="tabcontent">
+    <h3 style="color: white;">
         Disclaimer! 
         Please support the original creators,artists, and brands used. Another thing! Some songs either don't have clean versions or the clean version is too much, so intrumentals were added!
         All music used and all brand/artist related materials used are NOT owned by me, theses are STRICTLY for educational purposes!!!
-    </h2>
-    
-</div>
-<!-- <div id="Artists" class="tabcontent">
-    <h1>Artists</h1>
-    A list of most artists I listen to.
-<div id="profiles">
-    <h1>Young Slo-Be</h1>
-    <img src="Images/pfp1.png" alt="pfp">
-    <h1>MoneySign Suede - $uede</h1>
-    <img src="Images/pfp3.png" alt="pfp">
-    <h1>Blxst</h1>
-    <img src="Images/pfp4.png" alt="pfp">
-    <h1>Kendrick Lamar</h1>
-    <img src="Images/pfp7.png" alt="pfp">
-    <h1>Lil Tjay</h1>
-    <img src="Images/pfp11.png" alt="pfp">
-    <h1>Sleepy Hallow</h1>
-    <img src="Images/pfp5.png" alt="pfp">
-    <h1>Sheff G</h1>
-    <img src="Images/pfp2.png" alt="pfp">
-    <h1>Pop Smoke</h1>
-    <img src="Images/pfp6.png" alt="pfp">
-    <h1>Lil Tecca</h1>
-    <img src="Images/pfp16.png" alt="pfp">
-    <h1>DD Osama</h1>
-    <img src="Images/pfp21.png" alt="pfp">
-    <h1>MDot EBK</h1>
-    <img src="Images/pfp22.png" alt="pfp">
-    <h1>Lee Drilly</h1>
-    <img src="Images/pfp18.png" alt="pfp">
-    <h1>Kay Flocm</h1>
-    <img src="Images/pfp20.png" alt="pfp">
-    <h1>Dthang Gz</h1>
-    <img src="Images/pfp19.png" alt="pfp">
-    <h1>Sha EK</h1>
-    <img src="Images/pfp10.png" alt="pfp">
-    <h1>Fivio Foreign</h1>
-    <img src="Images/pfp8.png" alt="pfp">
-    <h1>$NOT</h1>
-    <img src="Images/pfp15.png" alt="pfp">
-    <h1>Isaac App</h1>
-    <img src="Images/pfp17.png" alt="pfp">
-    <h1>Polo G</h1>
-    <img src="Images/pfp12.png" alt="pfp">
-    <h1>Lil Loaded</h1>
-    <img src="Images/pfp14.png" alt="pfp">
-    <h1>Junior H</h1>
-    <img src="Images/pfp13.png" alt="pfp">
-</div> -->
+        <ul class="playlist" id="playlist">
+            <li data-src="Music/bigsteppa.mp3" data-cover="Images/CoverArt/BigSteppa.png" data-length="3:12">
+                <img src="Images/CoverArt/BigSteppa.png" alt="Cover1" class="cover-art">
+                <div>
+                    <b>Big Steppa - Lil Pete ft. Pahp</b>
+                    <span class="song-length">(3:12)</span>
+                </div>
+            </li>
+            <li data-src="Music/thankful.mp3" data-cover="Images/CoverArt/Thankful.png" data-length="2:58">
+                <img src="Images/CoverArt/Thankful.png" alt="Cover2" class="cover-art">
+                <div>
+                    <b>Thankful - Lil Pete</b>
+                    <span class="song-length">(2:58)</span>
+                </div>
+            </li>
+            <li data-src="Music/chosen.mp3" data-cover="Images/CoverArt/ChosenB.png" data-length="2:43">
+                <img src="Images/CoverArt/ChosenB.png" alt="Cover3" class="cover-art">
+                <div>
+                    <b>Chosen - BLXST ft. Ty Dolla $ign & Tyga</b>
+                    <span class="song-length">(2:43)</span>
+                </div>
+            </li>
+            <li data-src="Music/2055.mp3" data-cover="Images/CoverArt/2055.png" data-length="2:03">
+                <img src="Images/CoverArt/2055.png" alt="Cover4" class="cover-art">
+                <div>
+                    <b>2055 - Sleepy Hallow</b>
+                    <span class="song-length">(2:03)</span>
+                </div>
+            </li>
+            <li data-src="Music/forever.mp3" data-cover="Images/CoverArt/Forever.png" data-length="2:41">
+                <img src="Images/CoverArt/Forever.png" alt="Cover5" class="cover-art">
+                <div>
+                    <b>Forever - Tommy Ice</b>
+                    <span class="song-length">(2:41)</span>
+                </div>
+            </li>
+            <li data-src="Music/streetsdontloveyou.mp3" data-cover="Images/CoverArt/StreetsDontLoveYou.png" data-length="1:44">
+                <img src="Images/CoverArt/StreetsDontLoveYou.png" alt="Cover6" class="cover-art">
+                <div>
+                    <b>Streets Don't Love You - EBK Young Joc</b>
+                    <span class="song-length">(1:44)</span>
+                </div>
+            </li>
+            <li data-src="Music/countmeout.mp3" data-cover="Images/CoverArt/CountMeOut.png" data-length="4:44">
+                <img src="Images/CoverArt/CountMeOut.png" alt="Cover7" class="cover-art">
+                <div>
+                    <b>Count Me Out - Kendrick Lamar</b>
+                    <span class="song-length">(4:44)</span>
+                </div>
+            </li>
+            <li data-src="Music/alright.mp3" data-cover="Images/CoverArt/Alright.png" data-length="3:15">
+                <img src="Images/CoverArt/Alright.png" alt="Cover8" class="cover-art">
+                <div>
+                    <b>Alright - Kendrick Lamar</b>
+                    <span class="song-length">(3:15)</span>
+                </div>
+            </li>
+            <li data-src="Music/needme.mp3" data-cover="Images/CoverArt/TEC.png" data-length="2:21">
+                <img src="Images/CoverArt/TEC.png" alt="Cover9" class="cover-art">
+                <div>
+                    <b>Need Me - Lil Tecca</b>
+                    <span class="song-length">(2:21)</span>
+                </div>
+            </li>
+            <li data-src="Music/trippinonu.mp3" data-cover="Images/CoverArt/TEC.png" data-length="2:00">
+                <img src="Images/CoverArt/TEC.png" alt="Cover10" class="cover-art">
+                <div>
+                    <b>Trippin' On U - Lil Tecca</b>
+                    <span class="song-length">(2:00)</span>
+                </div>
+            </li>
+            <li data-src="Music/taste.mp3" data-cover="Images/CoverArt/Taste.png" data-length="2:53">
+                <img src="Images/CoverArt/Taste.png" alt="Cover11" class="cover-art">
+                <div>
+                    <b>TASTE - Lil Tecca</b>
+                    <span class="song-length">(2:53)</span>
+                </div>
+            </li>
+            <li data-src="Music/dancewiththedevil.mp3" data-cover="Images/CoverArt/DanceWithTheDevil.png" data-length="3:38">
+                <img src="Images/CoverArt/DanceWithTheDevil.png" alt="Cover12" class="cover-art">
+                <div>
+                    <b>Dance With The Devil - BLXST ft. Anderson .Paak</b>
+                    <span class="song-length">(3:38)</span>
+                </div>
+            </li>
+            <li data-src="Music/changeme.mp3" data-cover="Images/CoverArt/ChangeMe.png" data-length="2:17">
+                <img src="Images/CoverArt/ChangeMe.png" alt="Cover13" class="cover-art">
+                <div>
+                    <b>Change Me - BigXThaPlug</b>
+                    <span class="song-length">(2:17)</span>
+                </div>
+            </li>
+            <li data-src="Music/therapysession.mp3" data-cover="Images/CoverArt/TherapySession.png" data-length="1:49">
+                <img src="Images/CoverArt/TherapySession.png" alt="Cover14" class="cover-art">
+                <div>
+                    <b>Therapy Session - BigXThaPlug</b>
+                    <span class="song-length">(1:49)</span>
+                </div>
+            </li>
+            <li data-src="Music/longway.mp3" data-cover="Images/CoverArt/INeedYourLove.png" data-length="2:49">
+                <img src="Images/CoverArt/INeedYourLove.png" alt="Cover15" class="cover-art">
+                <div>
+                    <b>Long Way - BLXST ft. Amanda Reifer</b>
+                    <span class="song-length">(2:49)</span>
+                </div>
+            </li>
+            <li data-src="Music/GRITS - Ooh Ahh (My Life Be Like) (feat. tobyMac) OFFICIAL AUDIO 320.mp3" data-cover="Images/CoverArt/Grits.png" data-length="3:53">
+                <img src="Images/CoverArt/Grits.png" alt="Cover16" class="cover-art">
+                <div>
+                    <b>Ooh Ahh (My Life Be Like) - GRITS ft. TobyMac</b>
+                    <span class="song-length">(3:53)</span>
+                </div>
+            </li>
+            <li data-src="Music/flashinglights.mp3" data-cover="Images/CoverArt/KanyeWest.png" data-length="4:00">
+                <img src="Images/CoverArt/KanyeWest.png" alt="Cover17" class="cover-art">
+                <div>
+                    <b>Flashing Lights - Kanye West ft. Dwele</b>
+                    <span class="song-length">(4:00)</span>
+                </div>
+            </li>
+            <li data-src="Music/MeTime.mp3" data-cover="Images/CoverArt/MeTime.png" data-length="2:27">
+                <img src="Images/CoverArt/MeTime.png" alt="Cover18" class="cover-art">
+                <div>
+                    <b>Me Time - Eli Fross</b>
+                    <span class="song-length">(2:27)</span>
+                </div>
+            </li>
+            <li data-src="Music/homecoming.mp3" data-cover="Images/CoverArt/KanyeWest.png" data-length="3:26">
+                <img src="Images/CoverArt/KanyeWest.png" alt="Cover19" class="cover-art">
+                <div>
+                    <b>Homecoming - Kanye West ft. Chris Martin</b>
+                    <span class="song-length">(3:26)</span>
+                </div>
+            </li>
+            <li data-src="Music/middlechild.mp3" data-cover="Images/CoverArt/MiddleChild.png" data-length="3:34">
+                <img src="Images/CoverArt/MiddleChild.png" alt="Cover20" class="cover-art">
+                <div>
+                    <b>Middle Child - J. Cole</b>
+                    <span class="song-length">(3:34)</span>
+                </div>
+            </li>
+            <li data-src="Music/Libros.mp3" data-cover="Images/CoverArt/Cruisin.png" data-length="3:06">
+                <img src="Images/CoverArt/Cruisin.png" alt="Cover21" class="cover-art">
+                <div>
+                    <b>Libros Y Libretas - Junior H</b>
+                    <span class="song-length">(3:06)</span>
+                </div>
+            </li>
+            <li data-src="Music/Pomme.mp3" data-cover="Images/CoverArt/Stromae.png" data-length="2:28">
+                <img src="Images/CoverArt/Stromae.png" alt="Cover22" class="cover-art">
+                <div>
+                    <b>Ma Meilleure Ennemie - Stromae ft. Pomme</b>
+                    <span class="song-length">(2:28)</span>
+                </div>
+            </li>
+            </li>
+            <li data-src="Music/Pressure.mp3" data-cover="Images/CoverArt/ChosenB.png" data-length="2:09">
+                <img src="Images/CoverArt/ChosenB.png" alt="Cover23" class="cover-art">
+                <div>
+                    <b>Pressure - BLXST</b>
+                    <span class="song-length">(2:09)</span>
+                </div> 
+            </li>
+            </li>
+            <li data-src="Music/be alone.mp3" data-cover="Images/CoverArt/ChosenB.png" data-length="2:34">
+                <img src="Images/CoverArt/ChosenB.png" alt="Cover24" class="cover-art">
+                <div>
+                    <b>Be Alone - BLXST</b>
+                    <span class="song-length">(2:34)</span>
+                </div>
+            </li>
+            <li data-src="Music/wantitbad.mp3" data-cover="Images/CoverArt/TEC.png" data-length="2:10">
+                <img src="Images/CoverArt/TEC.png" alt="Cover25" class="cover-art">
+                <div>
+                    <b>Want It Bad - Lil Tecca</b>
+                    <span class="song-length">(2:10)</span>
+                </div>
+            </li>
+            <li data-src="Music/realdiscussions.mp3" data-cover="Images/CoverArt/TEC.png" data-length="1:50">
+                <img src="Images/CoverArt/TEC.png" alt="Cover26" class="cover-art">
+                <div>
+                    <b>Real Discussions - Lil Tecca</b>
+                    <span class="song-length">(1:50)</span>
+                </div>
+            </li>
+        </ul>
 
-</div>
-    
+        <audio id="audioPlayer" controls></audio>
+<!-- End Playlist Tab -->
+
     <script>
         function openPage(pageName, elmnt, color) {
   // Hide all elements with class="tabcontent" by default */
@@ -549,6 +538,40 @@
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 
+// PlayList Script
+const playlist = document.getElementById('playlist');
+        const audioPlayer = document.getElementById('audioPlayer');
+        let currentSongIndex = 0;
+
+        const songs = Array.from(playlist.children);
+
+        // Load the selected song
+        function loadSong(index) {
+            const song = songs[index];
+            audioPlayer.src = song.getAttribute('data-src');
+
+            // Highlight the current song
+            songs.forEach(s => s.classList.remove('current-song'));
+            song.classList.add('current-song');
+        }
+
+        // Play the selected song
+        function playSong(index) {
+            loadSong(index);
+            audioPlayer.play();
+        }
+
+        // Add click functionality to playlist items
+        playlist.addEventListener('click', (e) => {
+            const target = e.target.closest('li'); // Ensure only <li> is clickable
+            if (target) {
+                currentSongIndex = songs.indexOf(target);
+                playSong(currentSongIndex);
+            }
+        });
+
+        // Initialize the first song
+        loadSong(currentSongIndex);
     </script>
 
 </body>
