@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Areas - On Your Own 2</title>
+    <style>
+        body
+        {
+            background-color: yellow;
+        }
+        #container
+        {
+            background-color: purple;
+            max-width: 1200px;
+            width: 80%;
+            margin: auto;
+            padding-top: 5rem;
+            padding-bottom: 1rem;
+        }
+        #wrapper
+        {
+            width: 80%; 
+            margin: auto;
+            background-color: darkblue;
+        }
+        #pageheader
+        {
+            background-color: orange;
+            min-height: 15rem;
+            grid-area: hea;
+            padding: 1rem;
+        }
+        #mainnav
+        {
+            background-color: aqua;
+            min-height: 30rem;
+            grid-area: nav;
+            padding: 1rem;
+        }
+        #intromedia
+        {
+            background-color: lime;
+            min-height:20rem;
+            grid-area: med;
+            padding: 1rem;
+        }
+        #pagemain
+        {
+            background-color: white;
+            min-height: 15rem;
+            grid-area: mai;
+            padding: 1rem;
+        }
+        #card001
+        {
+            background-color: coral;
+            min-height: 15rem;
+            border: 1px solid black;
+            grid-area: c1;
+            padding: 1rem;
+        }
+        #card002
+        {
+            background-color: lightblue;
+            min-height: 15rem;
+            border: 1px solid black;
+            grid-area: c2;
+            padding: 1rem;
+        }
+        #pagefooter
+        {
+            background-color: gold;
+            min-height: 6rem;
+            grid-area: foo;
+            padding: 1rem;
+        }
+        #pagedetails
+        {
+            background-color: silver;
+            min-height: 20rem;
+            grid-area: det;
+            padding: 1rem;
+        }
+        @media screen and (min-width:768px)
+        {
+            #wrapper
+            {
+                display: grid;
+                gap: 10px;
+                grid-template-areas:
+                "hea hea hea "
+                "med med med "
+                "nav mai mai "
+                "nav c1 c2"
+                "foo foo foo"
+                "det det det"
+                ;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="wrapper">
+            <header id="pageheader">#pageheader</header>
+            <nav id="mainnav">#mainnav</nav>
+            <div id="intromedia">#intromedia</div>
+            <main id="pagemain">#pagemain</main>
+            <section id="card001">#card001</section>
+            <section id="card002">#card002</section>
+            <footer id="pagefooter">#pagefooter</footer>
+            <footer id="pagedetails">#pagedetails</footer>
+        </div>
+    </div>
+</body>
+</html>
