@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Areas - On Your Own</title>
+    <style>
+        body
+        {
+            background-color: yellow;
+        }
+        div#container
+        {
+            background-color: purple;
+            max-width: 1200px;
+            margin: auto;
+            border: 5px solid yellow;
+            padding: 1rem;
+        }
+        div#wrapper
+        {
+            max-width: 80%;
+            margin: auto;
+            background-color: green;
+        }
+        div#pageheader
+        {
+            background-color: orange;
+            grid-area: hea;
+        }
+        nav#mainnav
+        {
+            background-color: aqua;
+            grid-area: nav;
+        }
+        #intromedia
+        {
+            background-color: lime;
+            grid-area: med;
+        }
+        #pagemain
+        {
+            background-color: white;
+            grid-area: mai;
+        }
+        #pageaside
+        {
+            background-color: lightseagreen;
+            grid-area: asi;
+        }
+        #card001
+        {
+            background-color: coral;
+            grid-area: c001;
+        }
+        #card002
+        {
+            background-color: lightblue;
+            grid-area: c002;
+        }
+        #card003
+        {
+            background-color: lightgreen;
+            grid-area: c003;
+        }
+        #pagefooter
+        {
+            background-color: gold;
+            grid-area: foo;
+        }
+        #pagedetails
+        {
+            background-color: silver;
+            grid-area: det;
+        }
+        @media screen and (min-width:480px)
+        {
+            #wrapper
+            {
+                display: grid;
+                grid-template-areas:
+                "hea hea hea hea"
+                "med med med med"
+                "nav nav nav nav"
+                "mai mai mai mai"
+                "asi asi asi asi"
+                "c001 c001 c001 c001"
+                "c002 c002 c002 c002"
+                "c003 c003 c003 c003"
+                "foo foo foo foo"
+                "det det det det"
+                ;
+            }
+            #pagemain
+            {
+                min-height: 22rem;
+            }
+            #pageaside
+            {
+                min-height: 22rem;
+            }
+            #pagefooter
+            {
+                min-height: 5rem;
+            }
+            #pagedetails
+            {
+                min-height: 18rem;
+            }
+            #card001, #card002, #card003
+            {
+                min-height: 10rem;
+                border: 1px solid black;
+            }
+            #mainnav
+            {
+                min-height: 5rem;
+            }
+            #intromedia
+            {
+                min-height: 15rem;
+            }
+            #pageheader
+            {
+                min-height: 10rem;
+            }
+        }
+        @media screen and (min-width:768px) 
+        {
+            #wrapper
+            {
+                display: grid;
+                gap: 10px;
+                grid-template-areas:
+                "hea hea hea "
+                "nav nav nav "
+                "med med med "
+                "mai mai asi "
+                "c001 c002 c003 "
+                "foo foo foo "
+                "det det det "
+                ;
+            }
+            #pagemain
+            {
+                min-height: 22rem;
+            }
+            #pageaside
+            {
+                min-height: 22rem;
+            }
+            #pagefooter
+            {
+                min-height: 5rem;
+            }
+            #pagedetails
+            {
+                min-height: 18rem;
+            }
+            #card001, #card002, #card003
+            {
+                min-height: 10rem;
+                border: 1px solid black;
+            }
+            #mainnav
+            {
+                min-height: 5rem;
+            }
+            #intromedia
+            {
+                min-height: 15rem;
+            }
+            #pageheader
+            {
+                min-height: 10rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="wrapper">
+            <div id="pageheader">Page Header</div>
+            <nav id="mainnav">Main Nav</nav>
+            <div id="intromedia">Intro Media</div>
+            <main id="pagemain">Page Main</main>
+            <aside id="pageaside">Page Aside</aside>
+            <section id="card001">Card001</section>
+            <section id="card002">Card002</section>
+            <section id="card003">Card003</section>
+            <footer id="pagefooter">Page Footer</footer>
+            <footer id="pagedetails">Page Details</footer>
+        </div>
+    </div>
+</body>
+</html>

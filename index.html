@@ -8,28 +8,89 @@
         body
         {
             background-color: black;
+            background-image: url(Images/HomePageImages/background.png);
+            background: cover;
         }
         /* Style tab links */
         .tablink {
-        background-color: black;
-        color: white;
-        float: right;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        padding: 10px;
-        font-size: 15px;
-        width: 7%;
+            background-color: rgba(0, 0, 0, 0.666);
+            color: white;
+            float: right;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 15px;
+            width: 7%;
         }
-
         /* Style the tab content (and add height:100% for full page content) */
         .tabcontent {
-        color: black;
-        display: none;
-        padding: 30px 20px;
-        height: 100%;
+            color: black;
+            display: none;
+            padding: 30px 20px;
+            height: 100%;
+        }
+        .tablink:hover{
+            background-color: rgba(56, 56, 56, 0.666)
+        }
+        .tablink:focus{
+            background-color: rgba(80, 80, 80, 0.555)
+        }
+        /* Center content inside pageheader, subfooter, media, and semesters */
+        #pageheader, #subfooter, #videos, #semesters {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        /* Ensure images inside centered sections are also centered */
+        #pageheader img {
+            width: 10%;
+            
+        }
+        #semesters{
+            background:rgba(0, 0, 0, 0.666);
+        }
+        /* Style links to be centered inside their sections */
+        #semesters a{
+            display: block;
+            margin: 10px 30px; /* Adds spacing between links */
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            padding: 1rem;
+        }
+        #pageheader
+        {
+            background-color: rgba(0, 0, 0, 0.666);
+        }
+        #videos
+        {
+            background-color: rgba(0, 0, 0, 0.666);
         }
 
+        #subfooter
+        {
+            background-color: rgba(0, 0, 0, 0.666);
+            color: white;
+        }
+        #subfooter a:link, a:visited
+        {
+            color: white;
+            text-decoration: none;
+        }
+        /* Media Tab */
+        #Media
+        {
+            background-color: rgba(0, 0, 0, 0.666);
+        }
+        #Media img {
+            width: 100%; /* Make images responsive */
+            max-width: 320px; /* Set a maximum width */
+            height: auto; /* Maintain aspect ratio */
+            margin: 1px; /* Center images */
+        }
+        /* Playlist Tab */
         /*Playlist Style*/
         .playlist {
             display: grid;
@@ -44,7 +105,7 @@
             align-items: center;
             gap: 10px;
             padding: 10px;
-            background-color: none;
+            background-color: rgba(0, 0, 0, 0.666);
             border: 1px solid #d1af47;
             border-radius: 5px;
             cursor: pointer;
@@ -67,168 +128,204 @@
             justify-content: center;
         }
 
-        .song-length {
-            font-size: 0.9em;
-            color: #555;
-        }
-
         .current-song {
-            color: #014421;
+            color: #00ffe1;
             font-weight: bold;
         }
-        #pageheader
+        /* Albums Tab */
+        #Albums
         {
-            min-height: 370px;
+            background-color: rgba(0, 0, 0, 0.666);
+        }
+        #Albums img {
+            width: 100%; /* Makes the image responsive */
+            max-width: 550px; /* Prevents the image from being too large */
+            height: auto; /* Maintains aspect ratio */
+            padding-left: 5rem;
+        }
+        /* Classroom Tab */
+        #Classroom
+        {
+            background-color: rgba(0, 0, 0, 0.666);
+        }
+        @media screen and (max-width:480px)
+        {
+            .playlist li div
+            {
+                display: none;
+            }
+            .cover-art{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        }
+        @media screen and (min-width:480px) 
+        {
+            .tablink
+            {
+                float: right;
+                width: 20%;
+                padding: 8px;
+            }
+            #Albums img {
+            max-width: 100%; /* Prevents the image from being too large */
+            height: auto; /* Maintains aspect ratio */
+            }
+            
+        .playlist li {
+            display: flex;
+            align-items: center;
+            border: 1px solid #d1af47;
+        }
+        }
+        @media screen and (min-width:768px) 
+        {
+            .tablink
+            {
+                float: right;
+                width: 20%;
+                padding: 8px;
+            }
+            
+            #Albums img {
+            width: 100%; /* Makes the image responsive */
+            max-width: 550px; /* Prevents the image from being too large */
+            height: auto; /* Maintains aspect ratio */
+            padding-left: 5rem;
+            }
+            
+        .playlist li {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            padding: 1px;
             background-color: none;
-            padding: 1rem;
-            position: relative;
-            font-family: "cardo";
-            
+            border: 1px solid #d1af47;
+            cursor: pointer;
         }
-        #background
+        .playlist li div
         {
-            background-size: cover;
+            font-size: 0.8rem;
         }
-        #media
-        {
-            min-height: 200px;
-            background-color: lightblue;
-            padding: 1rem;
-            
         }
-        #career
+        @media screen and (max-width:1930px) 
         {
-            min-height: 200px;
-            background-color: aqua;
-            padding: 1rem;
+            .tablink
+            {
+                float: right;
+                width: 20%;
+                padding: 8px;
+            }
+            iframe {
+                width: 100%; /* Make it responsive */
+                max-width: 1390px; /* Set a maximum width */
+                height: 600px; /* Adjust height */
+                border: none; /* Remove border if needed */
+            }
+            .playlist li div
+        {
+            font-size: 1rem;
         }
-        #pagecontent
-        {
-            min-height: 200px;
-            background-color: lightgreen;
-            padding: 1rem;
+        .playlist li {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px;
+            background-color: none;
+            border: 1px solid #d1af47;
+            cursor: pointer;
         }
-        #semesters
-        {
-            min-height: 200px;
-            background-color: lightpink;
-            padding: 1rem;
-        }
-        #pagefooter
-        {
-            min-height: 200px;
-            background-color: lightseagreen;
-            padding: 1rem;
-        }
-        #subfooter
-        {
-            min-height: 200px;
-            background-color: black;
-            padding: 1rem;
         }
     </style>
 </head>
 <body>
     <!-- Start Tabs -->
-    <button class="tablink" onclick="openPage('Classroom', this, 'pink')" id="">Classroom</button>
-    <button class="tablink" onclick="openPage('Albums', this, 'green')">Albums</button>
-    <!-- <button class="tablink" onclick="openPage('About', this, 'orange')">About</button> -->
-    <button class="tablink" onclick="openPage('Playlist', this, 'purple')">Playlist</button>
-    <button class="tablink" onclick="openPage('Media', this, 'blue')" id="">Media</button>
-    <button class="tablink" onclick="openPage('Home', this, 'red')" id="defaultOpen">Home</button>
+    <button class="tablink" onclick="openPage('Classroom')" id="">Classroom</button>
+    <button class="tablink" onclick="openPage('Albums')">Albums</button>
+    <button class="tablink" onclick="openPage('Playlist')">Playlist</button>
+    <button class="tablink" onclick="openPage('Media')" id="">Media</button>
+    <button class="tablink" onclick="openPage('Home')" id="defaultOpen">Home</button>
     <!-- End Tabs -->
 
     <!-- Start Home Tab -->
     <div id="Home" class="tabcontent">
-        <!-- begin pageheader -->
-    <header id="pageheader">
-        <div id="logo">
-            <a href="https://stupendous-capybara-4ff9b2.netlify.app/?scrlybrkr=2f5a8d33" target="_blank">
-                <img src="Images/logo.png" alt="logo" style="width: 360px; height: 360px; margin: auto;">
-            </a>
-            
-            </div>
-            
+        <header id="pageheader">
+            <img src="Images/HomePageImages/logo.png" alt="Logo">
     </header>
+            
     <!-- end header -->
 
-    <!-- begin features -->
-    <section id="career">
-        career
-
+    <!-- begin videos -->
+    <div id="videos">
+        <h2 style="color: white;">
+            <p>"Just because I'm alone doesn't mean I'm lonely. Being true to myself means accepting some paths are walked alone." - Huey Freeman</p>
+        </h2>
+        <!-- Videos -->
         
-        <div class="container"></div>
-    </section>
-    <!-- end features -->
+    </div>
+    <!-- End videos -->
 
     <!-- begin semesters -->
     <section id="semesters">
-
-        Semester 2
+        <h2 style="color: white;">Assignments</h2>
         <!-- begin assignment list -->
-        <ul>
-            <li>
-                <a href="Projects/paintingappv3test.html" style="color: white;">Painting App</a>
-            </li>
-            <li>
-                <a href="Semester 2/personalizedarray.html" style="color: white;">Personalized Array</a>
-            </li>
-            <li>
-                <a href="Semester 2/ClassNotesMarkDown4.md" style="color: white;">Markdown 4</a>
-            </li>
-            <li>
-                <a href="Semester 2/ClassNotesMarkDown5.md" style="color: white;">Markdown 5</a>
-            </li>
-            <li>
-                <a href="CareerSkillsChallenge/2025/index.html" style="color: white;">Responsive CSS</a>
-            </li>
-            <li>
-                <a href="Semester 2/gridareas.html" style="color: white;">Grid Areas - On Your Own</a>
-            </li>
-            <li>
-                <a href="Activities/GridAreasOnYourOwn2/gridareasonyourown2.html" style="color: white;">Grid Areas - On Your Own 2</a>
-            </li>
-        </ul>
-
-        <div class="container"></div>
+                <a href="Projects/paintingappv3test.html">Painting App</a>
+                <a href="Semester 2/personalizedarray.html">Personalized Array</a>
+                <a href="Semester 2/ClassNotesMarkDown4.md">Markdown 4</a>
+                <a href="Semester 2/ClassNotesMarkDown5.md">Markdown 5</a>
+                <a href="Semester 2/gridareas.html">Grid Areas - On Your Own</a>
     </section>
     <!-- end semesters -->
 
-    <!-- being pagefooter -->
-    <footer id="pagefooter">
-        Pagefooter
-        
-        <div class="container"></div>
-    </footer>
-    <!-- end pagefooter -->
-
-     <!-- begin subfooter -->
+    <!-- begin subfooter -->
     <footer id="subfooter">
         <h2>
-            <div id="subfooter"></div>
+            <div id="subfooter">
+        <a href="https://chagoyan.com">Chagoyan Website</a>
+        |
+        <a href="https://youtube.com">YouTube</a>
+        |
+        <a href="https://classroom.google.com/h">Google Classroom</a>
+            </div>
         </h2>
-            
     </footer>
 </div>
     </div>
+        </div>
+        
     
     <!-- End Home Tab -->
 
     <!-- Start Media Tab -->
 <div id="Media" class="tabcontent">
-
-    <!-- <h1 style="color: white; text-align: center;">Movies</h1>
-    <img src="Images/MovieArt/Tokyo.png" alt="TokyoDrift" style="width: 270px; height: 524px;">
-    <img src="Images/MovieArt/Compton.png" alt="Compton" style="width: 270px; height: 524px;">
-    <img src="Images/MovieArt/poster5.png" alt="IntoSpider" style="width: 270px; height: 524px;">
-    <img src="Images/MovieArt/poster3.png" alt="SpiritedAway" style="width: 270px; height: 524px;">
-    <h1 style="color: white; text-align: center;" >Shows</h1> -->
-    <!-- 
-    Arcane
-    Initial D
-    Boondocks
-    Scott Piglrim Vs the World]
-    -->
+    <h1 style="color: white; text-align: center;">Videos</h1>
+            <video controls width="100%">
+                <source src="Videos/BIBLETrailer.mp4">
+                This browser doesn't support video
+            </video>
+            <video controls width="100%">
+                <source src="Videos/NoLoveLostTrailer.mp4">
+                This browser doesn't support video
+            </video>
+            <video controls width="100%">
+                <source src="Videos/PainAndLove2Trailer.mp4">
+                This browser doesn't support video
+            </video>
+            <video controls width="100%" style="display: ;">
+                <source src="Videos/TakeCareTrailer.mp4">
+                This browser doesn't support video
+            </video>
+    <h1 style="color: white; text-align: center;">Movies</h1>
+    <img src="Images/MovieArt/TokyoDrift.png" alt="TokyoDrift">
+    <img src="Images/MovieArt/Compton.png" alt="Compton">
+    <img src="Images/MovieArt/IntoSpiderVerse.png" alt="IntoSpiderVerse">
+    <img src="Images/MovieArt/SpiritedAway.png" alt="SpiritedAway"">
+    <h1 style="color: white; text-align: center;" >Shows</h1>
+    <img src="Images/ShowArt/InitialD.png" alt="InitialD"">
+    <img src="Images/ShowArt/LOLA.png" alt="LeagueOfLegendsArcane"">
+    <img src="Images/ShowArt/SPTO.png" alt="ScottPilgrimTakesOff"">
+    <img src="Images/ShowArt/TBD.png" alt="TheBoonDocks"">
 </div>
     <!-- End Media Tab -->
 
@@ -237,8 +334,8 @@
 
 <div id="Classroom" class="tabcontent">
     <h1 style="color: white;">Aeries Grades</h1>
-  <p style="color: white;">Will be updated overtime</p>
-  <iframe src="https://coalingahuron.aeries.net/" width="1390px" height="1000px"></iframe>
+  <p style="color: white;">Check your grades</p>
+  <iframe src="https://coalingahuron.aeries.net/"></iframe>
   
 </div>
 
@@ -248,273 +345,283 @@
     <!-- Begin Albums Tab -->
 <div id="Albums" class="tabcontent">
     <h1 class="headline" style="color: white;">"Without Music, Life Would Be A Mistake" - Friedrich Nietzsche</h1>
-    <p style="color: white;">These are some of the albums I enjoy listening to, feel free to check them out.</p>
-    <h3>Albums:</h3>
-            <a href="https://open.spotify.com/album/2MDU46hcBn3u94s46BOSdv">
-                <img src="Images/Popsmoke.png" alt="SHOOTFORTHESTARSAIMFORTHEMOONDELUXE">
-            </a>
             <a href="https://open.spotify.com/album/0ZjOFfItjIA9YbzhERRIBr?scrlybrkr=2f5a8d33">
-                <img src="Images/SLEEP.png" alt="STILLSLEEPDELUXE">
+                <img src="Images/SSD.png" alt="STILLSLEEPDELUXE">
             </a>
             <a href="https://open.spotify.com/album/2x6s7ooABaADFz7ZTbuAMG?scrlybrkr=2f5a8d33">
-                <img src="Images/MOSDEF.png" alt="THEECSTATIC">
+                <img src="Images/TE.png" alt="THEECSTATIC">
             </a>
             <a href="https://open.spotify.com/album/3Xvvi8uwGnuj9nF7fr2h39?scrlybrkr=2f5a8d33">
-                <img src="Images/SHEFF.png" alt="THEUNLUCCYLUCCYKID">
+                <img src="Images/TULK.png" alt="THEUNLUCCYLUCCYKID">
             </a>
             <a href="https://open.spotify.com/album/7MXxt6ult07PrDraCxb5EK?scrlybrkr=2f5a8d33">
-                <img src="Images/BLXST.png" alt="ILLALWAYSCOMEFINDYOU">
-            </a>
-            <a href="https://open.spotify.com/album/4SZko61aMnmgvNhfhgTuD3">
-                <img src="Images/KANYE.png" alt="GRAD">
+                <img src="Images/IACFY.png" alt="ILLALWAYSCOMEFINDYOU">
             </a>
             <a href="https://open.spotify.com/album/0UMMIkurRUmkruZ3KGBLtG">
-                <img src="Images/JCOLE.png" alt="COLE">
+                <img src="Images/2014FHD.png" alt="COLE">
             </a>
             <a href="https://open.spotify.com/album/3KRqTwjYtuR11MnyM3X2xL">
-                <img src="Images/TJ.png" alt="TJ">
+                <img src="Images/222.png" alt="TJ">
             </a>
             <a href="https://open.spotify.com/album/6idVoBWP2mt1qoMtASm3gc">
-                <img src="Images/CURRY.png" alt="CURRY">
-            </a>
-            <a href="https://open.spotify.com/album/07w0rG5TETcyihsEIZR3qG">
-                <img src="Images/SZA.png" alt="SOS">
+                <img src="Images/T13OO.png" alt="CURRY">
             </a>
             <a href="https://open.spotify.com/album/1M1i7i0G5g0bhQIoyXeqJN">
-                <img src="Images/FIVI.png" alt="FIVI">
-            </a>
-            <a href="https://open.spotify.com/album/4EURMuWFiLLRmQYoH5cgiE">
-                <img src="Images/TEC.png" alt="TEC">
+                <img src="Images/PAL2.png" alt="FIVI">
             </a>
             <a href="https://open.spotify.com/album/39xhYyNNDatQtgKw2KdXMz">
-                <img src="Images/POLO.png" alt="POLO">
+                <img src="Images/TG.png" alt="POLO">
             </a>
             <a href="https://open.spotify.com/album/4UNZOq7e8WjnfaYm2rkltE">
-                <img src="Images/SNOT.png" alt="SNOT">
+                <img src="Images/TS.png" alt="SNOT">
             </a>
             <a href="https://open.spotify.com/album/4ycNE7y1rp5215g1kkqk1P">
-                <img src="Images/CENT.png" alt="CENT">
-            </a>
-            <a href="https://open.spotify.com/album/7AwrgenNcTAJlJF3pKL0Qr">
-                <img src="Images/LOVE.png" alt="LOVE">
+                <img src="Images/GRODT.png" alt="CENT">
             </a>
             <a href="https://open.spotify.com/album/79ONNoS4M9tfIA1mYLBYVX">
-                <img src="Images/KDOT.png" alt="KDOT">
-            </a>
-            <a href="https://open.spotify.com/album/3kEtdS2pH6hKcMU9Wioob1">
-                <img src="Images/NAS.png" alt="NAS">
+                <img src="Images/MMATBS.png" alt="KDOT">
             </a>
             <a href="https://open.spotify.com/album/3AxYGUXCG9OmZT5fiRAwJi">
-                <img src="Images/SOUTHEAST.png" alt="SLOBE">
+                <img src="Images/SE.png" alt="SLOBE">
             </a>
             <a href="https://open.spotify.com/album/6LU7SYL9BWAt3TgEK4DdAc">
-                <img src="Images/bigx.png" alt="BIGX">
+                <img src="Images/TC.png" alt="BIGX">
             </a>
-            <a href="https://open.spotify.com/album/7KSf6p0G0mZd7j60etVTwT">
-                <img src="Images/HallOfFame.png" alt="HALLOFFAME">
+            <a href="https://open.spotify.com/album/261LWEVYViMXijB95mAty3">
+                <img src="Images/2000.png" alt="JOEY">
+            </a>
+            <a href="https://open.spotify.com/album/1ep4OEfNOhvcY85STfEtKy">
+                <img src="Images/JM.png" alt="JACK">
+            </a>
+            <a href="https://open.spotify.com/album/7nTvm6EgmFWPLMLxj6aksS">
+                <img src="Images/WLYT2.png" alt="WELOVE">
+            </a>
+            <a href="https://open.spotify.com/album/6uGkCKnoTS641tt07DPiA2">
+                <img src="Images/PIR.png" alt="ELI">
             </a>
 </div>
 <!-- End Albums Tab -->
 
-<!-- Begin About Tab -->
-<!-- <div id="About" class="tabcontent">
-    
-    <h3 style="color:white">Hello, my name is Diego Garcia</h3>
-        <h1 style="color: white;">A little more about Me</h1>
-    <p style="color: white;">I've been taking Web Page for the past 2 years. My favorite subject is Fitness & Weight Training because I get to improve and focus on myself more better with the equipments provided, as well as being able to do it with the help of my friends in the same class. It motivates me to do better and be the better version of myself, it also helps wake me up in the morning when I'm not in the right mood. Other things I do is drawing, graphic design, and as of recently picking up writing and music production. I can confidently describe myself as someone with many interests. For now explore my web page for as long as you'd like. 
-        Welcome to my portforlio.</p>
-  </div> -->
-<!-- End About Tab -->
-
 <!-- Begin Playlist Tab -->
 <div id="Playlist" class="tabcontent">
     <h3 style="color: white;">
-        Disclaimer! 
-        Please support the original creators,artists, and brands used. Another thing! Some songs either don't have clean versions or the clean version is too much, so intrumentals were added!
-        All music used and all brand/artist related materials used are NOT owned by me, theses are STRICTLY for educational purposes!!!
         <ul class="playlist" id="playlist">
-            <li data-src="Music/bigsteppa.mp3" data-cover="Images/CoverArt/BigSteppa.png" data-length="3:12">
+            <li data-src="Music/bigsteppa.mp3" data-cover="Images/CoverArt/BigSteppa.png">
                 <img src="Images/CoverArt/BigSteppa.png" alt="Cover1" class="cover-art">
                 <div>
                     <b>Big Steppa - Lil Pete ft. Pahp</b>
-                    <span class="song-length">(3:12)</span>
                 </div>
             </li>
-            <li data-src="Music/thankful.mp3" data-cover="Images/CoverArt/Thankful.png" data-length="2:58">
+            <li data-src="Music/thankful.mp3" data-cover="Images/CoverArt/Thankful.png">
                 <img src="Images/CoverArt/Thankful.png" alt="Cover2" class="cover-art">
                 <div>
                     <b>Thankful - Lil Pete</b>
-                    <span class="song-length">(2:58)</span>
                 </div>
             </li>
-            <li data-src="Music/chosen.mp3" data-cover="Images/CoverArt/ChosenB.png" data-length="2:43">
+            <li data-src="Music/chosen.mp3" data-cover="Images/CoverArt/ChosenB.png">
                 <img src="Images/CoverArt/ChosenB.png" alt="Cover3" class="cover-art">
                 <div>
                     <b>Chosen - BLXST ft. Ty Dolla $ign & Tyga</b>
-                    <span class="song-length">(2:43)</span>
                 </div>
             </li>
-            <li data-src="Music/2055.mp3" data-cover="Images/CoverArt/2055.png" data-length="2:03">
+            <li data-src="Music/2055.mp3" data-cover="Images/CoverArt/2055.png">
                 <img src="Images/CoverArt/2055.png" alt="Cover4" class="cover-art">
                 <div>
                     <b>2055 - Sleepy Hallow</b>
-                    <span class="song-length">(2:03)</span>
                 </div>
             </li>
-            <li data-src="Music/forever.mp3" data-cover="Images/CoverArt/Forever.png" data-length="2:41">
+            <li data-src="Music/forever.mp3" data-cover="Images/CoverArt/Forever.png">
                 <img src="Images/CoverArt/Forever.png" alt="Cover5" class="cover-art">
                 <div>
                     <b>Forever - Tommy Ice</b>
-                    <span class="song-length">(2:41)</span>
                 </div>
             </li>
-            <li data-src="Music/streetsdontloveyou.mp3" data-cover="Images/CoverArt/StreetsDontLoveYou.png" data-length="1:44">
+            <li data-src="Music/streetsdontloveyou.mp3" data-cover="Images/CoverArt/StreetsDontLoveYou.png">
                 <img src="Images/CoverArt/StreetsDontLoveYou.png" alt="Cover6" class="cover-art">
                 <div>
                     <b>Streets Don't Love You - EBK Young Joc</b>
-                    <span class="song-length">(1:44)</span>
                 </div>
             </li>
-            <li data-src="Music/countmeout.mp3" data-cover="Images/CoverArt/CountMeOut.png" data-length="4:44">
+            <li data-src="Music/countmeout.mp3" data-cover="Images/CoverArt/CountMeOut.png">
                 <img src="Images/CoverArt/CountMeOut.png" alt="Cover7" class="cover-art">
                 <div>
                     <b>Count Me Out - Kendrick Lamar</b>
-                    <span class="song-length">(4:44)</span>
                 </div>
             </li>
-            <li data-src="Music/alright.mp3" data-cover="Images/CoverArt/Alright.png" data-length="3:15">
+            <li data-src="Music/alright.mp3" data-cover="Images/CoverArt/Alright.png">
                 <img src="Images/CoverArt/Alright.png" alt="Cover8" class="cover-art">
                 <div>
                     <b>Alright - Kendrick Lamar</b>
-                    <span class="song-length">(3:15)</span>
                 </div>
             </li>
-            <li data-src="Music/needme.mp3" data-cover="Images/CoverArt/TEC.png" data-length="2:21">
+            <li data-src="Music/needme.mp3" data-cover="Images/CoverArt/TEC.png">
                 <img src="Images/CoverArt/TEC.png" alt="Cover9" class="cover-art">
                 <div>
                     <b>Need Me - Lil Tecca</b>
-                    <span class="song-length">(2:21)</span>
                 </div>
             </li>
-            <li data-src="Music/trippinonu.mp3" data-cover="Images/CoverArt/TEC.png" data-length="2:00">
+            <li data-src="Music/trippinonu.mp3" data-cover="Images/CoverArt/TEC.png">
                 <img src="Images/CoverArt/TEC.png" alt="Cover10" class="cover-art">
                 <div>
                     <b>Trippin' On U - Lil Tecca</b>
-                    <span class="song-length">(2:00)</span>
                 </div>
             </li>
-            <li data-src="Music/taste.mp3" data-cover="Images/CoverArt/Taste.png" data-length="2:53">
+            <li data-src="Music/taste.mp3" data-cover="Images/CoverArt/Taste.png">
                 <img src="Images/CoverArt/Taste.png" alt="Cover11" class="cover-art">
                 <div>
                     <b>TASTE - Lil Tecca</b>
-                    <span class="song-length">(2:53)</span>
                 </div>
             </li>
-            <li data-src="Music/dancewiththedevil.mp3" data-cover="Images/CoverArt/DanceWithTheDevil.png" data-length="3:38">
+            <li data-src="Music/dancewiththedevil.mp3" data-cover="Images/CoverArt/DanceWithTheDevil.png">
                 <img src="Images/CoverArt/DanceWithTheDevil.png" alt="Cover12" class="cover-art">
                 <div>
                     <b>Dance With The Devil - BLXST ft. Anderson .Paak</b>
-                    <span class="song-length">(3:38)</span>
                 </div>
             </li>
-            <li data-src="Music/changeme.mp3" data-cover="Images/CoverArt/ChangeMe.png" data-length="2:17">
+            <li data-src="Music/changeme.mp3" data-cover="Images/CoverArt/ChangeMe.png">
                 <img src="Images/CoverArt/ChangeMe.png" alt="Cover13" class="cover-art">
                 <div>
                     <b>Change Me - BigXThaPlug</b>
-                    <span class="song-length">(2:17)</span>
                 </div>
             </li>
-            <li data-src="Music/therapysession.mp3" data-cover="Images/CoverArt/TherapySession.png" data-length="1:49">
+            <li data-src="Music/therapysession.mp3" data-cover="Images/CoverArt/TherapySession.png">
                 <img src="Images/CoverArt/TherapySession.png" alt="Cover14" class="cover-art">
                 <div>
                     <b>Therapy Session - BigXThaPlug</b>
-                    <span class="song-length">(1:49)</span>
                 </div>
             </li>
-            <li data-src="Music/longway.mp3" data-cover="Images/CoverArt/INeedYourLove.png" data-length="2:49">
+            <li data-src="Music/longway.mp3" data-cover="Images/CoverArt/INeedYourLove.png">
                 <img src="Images/CoverArt/INeedYourLove.png" alt="Cover15" class="cover-art">
                 <div>
                     <b>Long Way - BLXST ft. Amanda Reifer</b>
-                    <span class="song-length">(2:49)</span>
                 </div>
             </li>
-            <li data-src="Music/GRITS - Ooh Ahh (My Life Be Like) (feat. tobyMac) OFFICIAL AUDIO 320.mp3" data-cover="Images/CoverArt/Grits.png" data-length="3:53">
+            <li data-src="Music/OohAhh.mp3" data-cover="Images/CoverArt/Grits.png">
                 <img src="Images/CoverArt/Grits.png" alt="Cover16" class="cover-art">
                 <div>
                     <b>Ooh Ahh (My Life Be Like) - GRITS ft. TobyMac</b>
-                    <span class="song-length">(3:53)</span>
                 </div>
             </li>
-            <li data-src="Music/flashinglights.mp3" data-cover="Images/CoverArt/KanyeWest.png" data-length="4:00">
+            <li data-src="Music/flashinglights.mp3" data-cover="Images/CoverArt/KanyeWest.png">
                 <img src="Images/CoverArt/KanyeWest.png" alt="Cover17" class="cover-art">
                 <div>
                     <b>Flashing Lights - Kanye West ft. Dwele</b>
-                    <span class="song-length">(4:00)</span>
                 </div>
             </li>
-            <li data-src="Music/MeTime.mp3" data-cover="Images/CoverArt/MeTime.png" data-length="2:27">
+            <li data-src="Music/MeTime.mp3" data-cover="Images/CoverArt/MeTime.png">
                 <img src="Images/CoverArt/MeTime.png" alt="Cover18" class="cover-art">
                 <div>
                     <b>Me Time - Eli Fross</b>
-                    <span class="song-length">(2:27)</span>
                 </div>
             </li>
-            <li data-src="Music/homecoming.mp3" data-cover="Images/CoverArt/KanyeWest.png" data-length="3:26">
+            <li data-src="Music/homecoming.mp3" data-cover="Images/CoverArt/KanyeWest.png">
                 <img src="Images/CoverArt/KanyeWest.png" alt="Cover19" class="cover-art">
                 <div>
                     <b>Homecoming - Kanye West ft. Chris Martin</b>
-                    <span class="song-length">(3:26)</span>
                 </div>
             </li>
-            <li data-src="Music/middlechild.mp3" data-cover="Images/CoverArt/MiddleChild.png" data-length="3:34">
+            <li data-src="Music/middlechild.mp3" data-cover="Images/CoverArt/MiddleChild.png">
                 <img src="Images/CoverArt/MiddleChild.png" alt="Cover20" class="cover-art">
                 <div>
                     <b>Middle Child - J. Cole</b>
-                    <span class="song-length">(3:34)</span>
                 </div>
             </li>
-            <li data-src="Music/Libros.mp3" data-cover="Images/CoverArt/Cruisin.png" data-length="3:06">
+            <li data-src="Music/Libros.mp3" data-cover="Images/CoverArt/Cruisin.png">
                 <img src="Images/CoverArt/Cruisin.png" alt="Cover21" class="cover-art">
                 <div>
                     <b>Libros Y Libretas - Junior H</b>
-                    <span class="song-length">(3:06)</span>
                 </div>
             </li>
-            <li data-src="Music/Pomme.mp3" data-cover="Images/CoverArt/Stromae.png" data-length="2:28">
+            <li data-src="Music/Pomme.mp3" data-cover="Images/CoverArt/Stromae.png">
                 <img src="Images/CoverArt/Stromae.png" alt="Cover22" class="cover-art">
                 <div>
                     <b>Ma Meilleure Ennemie - Stromae ft. Pomme</b>
-                    <span class="song-length">(2:28)</span>
                 </div>
             </li>
             </li>
-            <li data-src="Music/Pressure.mp3" data-cover="Images/CoverArt/ChosenB.png" data-length="2:09">
+            <li data-src="Music/Pressure.mp3" data-cover="Images/CoverArt/ChosenB.png">
                 <img src="Images/CoverArt/ChosenB.png" alt="Cover23" class="cover-art">
                 <div>
                     <b>Pressure - BLXST</b>
-                    <span class="song-length">(2:09)</span>
                 </div> 
             </li>
             </li>
-            <li data-src="Music/be alone.mp3" data-cover="Images/CoverArt/ChosenB.png" data-length="2:34">
+            <li data-src="Music/be alone.mp3" data-cover="Images/CoverArt/ChosenB.png">
                 <img src="Images/CoverArt/ChosenB.png" alt="Cover24" class="cover-art">
                 <div>
                     <b>Be Alone - BLXST</b>
-                    <span class="song-length">(2:34)</span>
                 </div>
             </li>
-            <li data-src="Music/wantitbad.mp3" data-cover="Images/CoverArt/TEC.png" data-length="2:10">
+            <li data-src="Music/wantitbad.mp3" data-cover="Images/CoverArt/TEC.png">
                 <img src="Images/CoverArt/TEC.png" alt="Cover25" class="cover-art">
                 <div>
                     <b>Want It Bad - Lil Tecca</b>
-                    <span class="song-length">(2:10)</span>
                 </div>
             </li>
-            <li data-src="Music/realdiscussions.mp3" data-cover="Images/CoverArt/TEC.png" data-length="1:50">
+            <li data-src="Music/realdiscussions.mp3" data-cover="Images/CoverArt/TEC.png">
                 <img src="Images/CoverArt/TEC.png" alt="Cover26" class="cover-art">
                 <div>
                     <b>Real Discussions - Lil Tecca</b>
-                    <span class="song-length">(1:50)</span>
+                </div>
+            </li>
+            <li data-src="Music/ImShooting.mp3" data-cover="Images/CoverArt/Shordie.png">
+                <img src="Images/CoverArt/Shordie.png" alt="Cover27" class="cover-art">
+                <div>
+                    <b>I'm Shooting - Shordie Shordie</b>
+                </div>
+            </li>
+            <li data-src="Music/TheyDontLoveIt.mp3" data-cover="Images/CoverArt/Harlow.png">
+                <img src="Images/CoverArt/Harlow.png" alt="Cover28" class="cover-art">
+                <div>
+                    <b>They Don't Love It - Jack Harlow</b>
+                </div>
+            </li>
+            <li data-src="Music/Same24.mp3" data-cover="Images/CoverArt/24.png">
+                <img src="Images/CoverArt/24.png" alt="Cover29" class="cover-art">
+                <div>
+                    <b>Same 24 - Fivio Foreign ft. Meek Mill</b>
+                </div>
+            </li>
+            <li data-src="Music/Stressed.mp3" data-cover="Images/CoverArt/Stressed.png">
+                <img src="Images/CoverArt/Stressed.png" alt="Cover30" class="cover-art">
+                <div>
+                    <b>Stressed - Lil Tjay ft. Summer Walker</b>
+                </div>
+            </li>
+            <li data-src="Music/Senorita.mp3" data-cover="Images/CoverArt/24k.png">
+                <img src="Images/CoverArt/24k.png" alt="Cover31" class="cover-art">
+                <div>
+                    <b>Senorita (Unreleased) - 24kgoldn ft. Lil Tecca</b>
+                </div>
+            </li>
+            <li data-src="Music/fakeloveinla.mp3" data-cover="Images/CoverArt/LA.png">
+                <img src="Images/CoverArt/LA.png" alt="Cover32" class="cover-art">
+                <div>
+                    <b>Fake Love In LA - BLXST</b>
+                </div>
+            </li>
+            <li data-src="Music/snot.mp3" data-cover="Images/CoverArt/Snot.png">
+                <img src="Images/CoverArt/Snot.png" alt="Cover33" class="cover-art">
+                <div>
+                    <b>Blue Moon - $NOT ft. Teddi Jones</b>
+                </div>
+            </li>
+            <li data-src="Music/holyground.mp3" data-cover="Images/CoverArt/holy.png">
+                <img src="Images/CoverArt/holy.png" alt="Cover34" class="cover-art">
+                <div>
+                    <b>Holy Grounds - BigXThaPlug ft. Jessie Murph</b>
+                </div>
+            </li>
+            <li data-src="Music/darkthoughts.mp3" data-cover="Images/CoverArt/dark.png">
+                <img src="Images/CoverArt/dark.png" alt="Cover35" class="cover-art">
+                <div>
+                    <b>Dark Thoughts - Lil Tecca</b>
+                </div>
+            </li>
+            <li data-src="Music/6locc6a6yways.mp3" data-cover="Images/CoverArt/loaded.png">
+                <img src="Images/CoverArt/loaded.png" alt="Cover36" class="cover-art">
+                <div>
+                    <b>6locc 6a6y Ways - Lil Loaded</b>
                 </div>
             </li>
         </ul>
