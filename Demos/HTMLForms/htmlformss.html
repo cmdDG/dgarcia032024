@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Forms</title>
+
+    <link rel="stylesheet" href="redtheme.css" id="#linktheme">
+    <link rel="stylesheet" href="bluetheme.css" id="#linktheme">
+    <link rel="stylesheet" href="greentheme.css" id="#linktheme">
+
+<style>
+body {
+background-color: #9da6a8;
+
+}
+
+h1 {
+color: rgb(0, 0, 0);
+text-align: center;
+}
+
+#formcontainer {
+width: 60%;
+max-width: 600px;
+min-height: 300px;
+padding: 1rem;
+background-color: rgb(97, 143, 166);
+border: 2px solid black;
+margin: auto;
+}
+
+p {
+background-color: rgb(170, 235, 255);
+border: 1px solid rgb(50, 125, 140);
+padding: 1rem;
+margin: auto;
+max-width: 500px;
+min-height: 200px;
+}
+
+fieldset {
+padding: 1rem;
+margin: 1rem;
+}
+
+legend {
+font-family: Arial, Helvetica, sans-serif;
+}
+
+label {
+padding: .25rem;
+}
+
+input[type="text"] {
+background-color: white;
+border: 2px solid black;
+}
+
+input[type='text']::placeholder {
+color: rgb(0, 0, 0);
+font-style: italic;
+}
+
+button {
+padding: .5rem;
+background-color: rgb(159, 182, 193);
+color: rgb(0, 0, 0);
+margin-bottom: .5rem;
+margin-top: .5rem;
+}
+
+input[name='language'] {
+outline: 2px solid black;
+outline-style: dashed;
+}
+
+input[name='language']:checked {
+accent-color: rgb(0, 251, 255);
+outline-color: rgb(255, 255, 255);
+}
+</style>
+</head>
+
+<body>
+<h1>HTML Forms</h1>
+
+<div id="formcontainer">
+
+
+<fieldset>
+<legend>Text Input Element</legend>
+<label for="textname">Enter your name:</label><br>
+<input type="text" id="textname" placeholder="Your Name">
+<br>
+<button id="savetextbutton">Save Text to Local Storage</button>
+<button id="loadtextbutton">Load Text from Local Storage</button>
+</fieldset>
+
+<fieldset>
+<legend>Radio Input Element</legend>
+
+
+<input type="radio" id="radhtml" value="html" name="language"><label for="radhtml">HTML</label>
+<input type="radio" id="radcss" value="css" name="language"><label for="radcss">CSS</label>
+<input type="radio" id="radjavascript" value="javascript" name="language"><label
+for="radjavascript">JavaScript</label>
+<br>
+
+<button id="saveradiobutton">Save Radio to Local Storage</button>
+<button id="loadradiobutton">Load Radio from Local Storage</button>
+</fieldset>
+
+<fieldset>
+<legend>Select Element</legend>
+<select name="themeselector" id="themeselector">
+<option value="redtheme.css">Red Theme</option>
+<option value="greentheme.css">Green Theme</option>
+<option value="bluetheme.css">Blue Theme</option>
+</select>
+
+</fieldset>
+
+<p name="paragraphoutput" id="paragraphoutput"></p>
+
+</div>
+
+
+<script>
+// The display paragraph
+const paragraphOutput = document.getElementById('paragraphoutput');
+
+//alert(paragraphOutput);
+
+/*
+Text Section
+Add event listeners to buttons when the save button is clicked
+save to local storage
+*/
+let saveTextButton;
+saveTextButton = document.querySelector('#savetextbutton');
+//alert(saveTextButton);
+let loadTextButton;
+loadTextButton = document.querySelector('#loadtextbutton');
+//alert(loadTextButton);
+
+// Add event listeners
+saveTextButton.addEventListener('click', function () {
+let textName;
+textName = document.querySelector('#textname').value;
+
+if (textName.trim() !== "") {
+localStorage.setItem('textUserName9926', textName);
+}
+else {
+alert("Please enter a name before saving.");
+}
+
+});
+
+loadTextButton.addEventListener('click', function () {
+let savedTextName;
+savedTextName = localStorage.getItem('textUserName9926');
+
+if (savedTextName !== null) {
+paragraphOutput.textContent = `Hello, ${savedTextName}!`;
+}
+else {
+paragraphOutput.textContent = "No name found in localStorage."
+}
+
+/*
+Radio Section
+*/
+
+
+
+});
+
+
+let savedRadioButton;
+savedRadioButton = document.querySelector('#saveradiobutton');
+// alert(savedRadioButton);
+
+let loadRadioButton;
+loadRadioButton = document.querySelector('#loadradiobutton');
+//alert(loadRadioButton);
+
+savedRadioButton.addEventListener('click', function () {
+let selectedRadio;
+selectedRadio = document.querySelector('input[name="language"]:checked');
+
+//alert(selectedRadio);
+
+if (selectedRadio == null) {
+alert('Please select a language before saving');
+}
+else {
+localStorage.setItem('selectedLanguage9926', selectedRadio.value);
+}
+});
+
+loadRadioButton.addEventListener('click', function()
+                {
+                    let savedLanguage;
+                    savedLanguage = localStorage.getItem('selectedLanguage9926');
+
+                    if(savedLanguage !== null)
+                    {
+                        let radioToCheck = document.querySelector('input[name = "language"][value="$[savedLanguage]"]');
+
+                        // if(radioToCheck!==null)
+                        // {
+                        //     radioToCheck.checked = true;
+                        //     paragraphOutput.textContent = 'You selected: ${savedLanguage}';
+                        // }
+                        // else
+                        // {
+                        //     paragraphOutput.textContent = 'Saved language not found.'
+                        // }
+                    
+                    }
+                    else
+                    {
+                        paragraphOutput.textContent = "No language found in localStorage"
+                    }
+
+                });
+
+                // Select section
+
+                let linkTheme; // link tag to the stylesheet
+                let selTheme; // selection form control to select theme
+
+                linkTheme = document.querySelector('#linktheme');
+                // alert(linkTheme);
+                selTheme = document.querySelector('#themeselector')
+                // alert(selTheme);
+
+                function updateTheme()
+                {
+                    // alert();
+                    linkTheme.href = selTheme.value;
+                    // alert(selTheme.value);
+                    localStorage.setItem('selectedTheme1938', selTheme.value);
+                }
+
+                window.addEventListener('resize', function()
+                {
+                    //alert();
+                    let savedTheme;
+                    savedTheme = localStorage.getItem('selectedTheme1938');
+
+                    // alert(savedTheme);
+
+                    if(savedTheme !== null)
+                    {
+                        linkTheme.href = savedTheme; // Load stylesheet
+                        selTheme.value = savedTheme;
+
+                        // Provide feedback in paragraph output
+                        paragraphOutput.textContent = '${selTheme.value} loaded from localStorage!';
+                    }
+
+
+                });
+
+</script>
+
+
+</body>
+
+</html>
