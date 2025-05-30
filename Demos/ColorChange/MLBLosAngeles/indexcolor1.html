@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diego Garcia Portfolio</title>
+    <style>
+        @font-face {
+            font-family: 'GreaterTheory';
+            src: url('Font/GreaterTheory.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Ethereal';
+            src: url('Font/EtherealDemo-Black.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Guma';
+            src: url('Font/gumarang.italic.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Gum';
+            src: url('Font/gumarang.regular.ttf') format('truetype');
+        }
+        body
+        {
+            background-color: black;
+            background-image: url(Images/HomePageImage/wallpaper.jpg);
+            background-size: cover;       /* Ensures it covers the area */
+            font-family: 'gum', sans-serif;
+            font-size: larger;
+        }
+    
+        html
+        {
+            scroll-behavior: smooth;
+        }
+        /* Audio Bar */
+        .draggable-player {
+            position: fixed;
+            bottom: -15px;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-top: 2px solid #003263;
+            padding: 15px 8px;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            z-index: 9999;
+            padding-top: .3rem;
+        }
+
+        .draggable-player button {
+            background-color: #BA0021;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+
+        .draggable-player button:hover {
+            background-color: #ff002f;
+        }
+
+        #progressBar {
+            flex-grow: 1;
+            accent-color: white;
+        }
+        /* Disclaimer Popup */
+        #disclaimer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
+            backdrop-filter: blur(20px); /* blur everything behind it */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 9999;
+            cursor: pointer;
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+        }
+
+        #disclaimer h1 {
+            font-size: 5rem;
+            margin-bottom: .5rem;
+        }
+
+        #disclaimer p {
+            font-size: 2rem;
+            max-width: 50%;
+        }
+        #main-content {
+            display: none;
+            padding: 2rem;
+        }
+        .hide-disclaimer {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        /* Style tab links */
+        .tablink {
+            background-color: rgba(0, 0, 0, 0.33);
+            font-family: 'Ethereal', sans-serif;
+            color: white;
+            float: right;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+        /* Style the tab content (and add height:100% for full page content) */
+        .tabcontent {
+            color: black;
+            display: block;
+            height: 100%;
+        }
+        .tablink:hover{
+            background-color: rgba(56, 56, 56, 0.33)
+        }
+        .tablink:focus{
+            background-color: rgba(80, 80, 80, 0.33)
+        }
+        /* Center content inside pageheader, subfooter, media, and semesters */
+        #pageheader, #subfooter, #videos, #semesters {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        /* Ensure images inside centered sections are also centered */
+        #pageheader img {
+            width: 20%;
+            
+        }
+        #semesters{
+            background:rgba(0, 0, 0, 0.33);
+            font-family: 'gum', sans-serif;
+        }
+        /* Style links to be centered inside their sections */
+        #semesters a{
+            display: block;
+            margin: 10px 30px; /* Adds spacing between links */
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            padding: 1rem;
+        }
+        #pageheader
+        {
+            background-color: rgba(0, 0, 0, 0.33);
+        }
+        #videos
+        {
+            background-color: rgba(0, 0, 0, 0.33);
+        }
+
+        #subfooter
+        {
+            background-color: rgba(0, 0, 0, 0.1);
+            color:none;
+            height: 5rem;
+        }
+        #subfooter a:link, a:visited
+        {
+            color: white;
+            text-decoration: none;
+            font-family: 'Ethereal', sans-serif;
+            font-size: x-large;
+        }
+        /* Media Tab */
+        #Media
+        {
+            background-color: rgba(0, 0, 0, 0.33);
+        }
+        /*Playlist Tab & Style*/
+        .playlist {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            list-style: none;
+            border-radius: 50%;
+        }
+
+        .playlist li{
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.33);
+            border: 1px solid white;
+            cursor: pointer;
+        }
+
+        .playlist li:hover {
+            background-color: #003263;
+        }
+
+        .cover-art {
+            width: 15%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .playlist li div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-family: 'GreatherTheory', sans-serif;
+        }
+
+        .current-song {
+            color: #BA0021;
+            font-weight: bold;
+        }
+        /* Albums Tab */
+        #Albums
+        {
+            background-color: rgba(0, 0, 0, 0.33);
+            font-family: 'Guma', sans-serif;
+            text-align: center;
+        }
+        #Albums img {
+            width: 100%; /* Makes the image responsive */
+            max-width: 550px; /* Prevents the image from being too large */
+            height: auto; /* Maintains aspect ratio */
+            padding-left: 5rem;
+        }
+        #Albums a:link, a:visited{
+            color: black;
+        }
+        /* Classroom Tab */
+        #Classroom
+        {
+            background-color: rgba(0, 0, 0, 0.33);
+        }
+        @media screen and (max-width:480px)
+        {
+            .playlist li div
+            {
+                display: none;
+            }
+            .cover-art{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }.tablink
+            {
+                float: right;
+                width: 5%;
+                font-size: 8px;
+            }
+        }
+        @media screen and (min-width:480px) 
+        {
+            
+            .tabcontent {
+            color: black;
+            display: none;
+            padding: 3px 2px;
+            height: 80%;
+            }
+            #Albums img {
+                max-width: 80%; /* Prevents the image from being too large */
+                height: auto;
+                padding-left: 2rem;
+            }
+        .playlist li {
+            display: flex;
+            align-items: center;
+            border: 1px solid #63009E;
+        }
+        }
+        @media screen and (min-width:768px) 
+        {
+            .tablink
+            {
+                float: right;
+                width: 8%;
+                padding: 3px;
+                font-size: 12px;
+            }
+            
+            #Albums img {
+            width: 100%; /* Makes the image responsive */
+            max-width: 550px; /* Prevents the image from being too large */
+            height: auto; /* Maintains aspect ratio */
+            padding-left: 5rem;
+            }
+            
+        .playlist li {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            padding: 1px;
+            background-color: none;
+            border: 1px solid #253540;
+            cursor: pointer;
+        }
+        .playlist li div
+        {
+            font-size: 0.8rem;
+        }
+        }
+        @media screen and (max-width:1930px) 
+        {
+            .tablink
+            {
+                float: right;
+                width: 20%;
+                font-size: large;
+                height: 3rem;
+            }
+            iframe {
+                width: 100%; /* Make it responsive */
+                max-width: 1390px; /* Set a maximum width */
+                height: 600px; /* Adjust height */
+                border: none; /* Remove border if needed */
+            }
+            .playlist li div
+        {
+            font-size: 1rem;
+        }
+        .playlist li {
+            display: flex;
+            gap: 4px;
+            background-color: none;
+            border: 2px solid #005A9C;
+            cursor: pointer;
+        }
+        }
+    </style>
+</head>
+<body>
+    <div id="disclaimer">
+            <img src="Images/HomePageImage/logo2.png" alt="">
+    </div>
+
+    <!-- Start Tabs -->
+    <button class="tablink" onclick="openPage('Classroom')">Classroom</button>
+    <button class="tablink" onclick="openPage('Albums')">Albums</button>
+    <button class="tablink" onclick="openPage('Playlist')">Playlist</button>
+    <button class="tablink" onclick="openPage('Media')">Media</button>
+    <button class="tablink" onclick="openPage('Home')" id="defaultOpen">Home</button>
+    <!-- End Tabs -->
+
+    <!-- Start Home Tab -->
+    <div id="Home" class="tabcontent">
+        <header id="pageheader">
+            <a href="https://stupendous-capybara-4ff9b2.netlify.app/">
+                <img src="Images/HomePageImage/logo.png" alt="Logo">
+            </a>
+    </header>
+            
+    <!-- end header -->
+
+    <!-- begin videos -->
+    <div id="videos">
+        <h2 style="color: white;">
+            <p>The City of Angels</p>
+        </h2>
+
+        <p style="color: white;">The Los Angeles Angels and Los Angeles Dodgers are two Major League Baseball teams with very different histories and achievements. The Dodgers, originally from Brooklyn, moved to Los Angeles in 1958 and quickly became one of the most successful teams in MLB history. They have won multiple World Series titles, including championships in 1959, 1963, 1965, 1981, 1988, and most recently in 2020. The Dodgers are known for legendary players like Jackie Robinson, Sandy Koufax, and Clayton Kershaw. On the other hand, the Angels were established in 1961 as an expansion team. They won their first and only World Series in 2002, led by players like Troy Glaus and Garret Anderson. While the Angels haven’t had as much success overall, they’ve had stars like Mike Trout and Shohei Ohtani, who have brought attention and excitement to the team in recent years. Both teams represent Los Angeles baseball but have carved out very different paths in the sport's history.</p>
+
+    
+            </div>
+        </div>
+    </div>
+    
+    <!-- End Home Tab -->
+
+    <!-- Start Media Tab -->
+    <div id="Media" class="tabcontent">
+        <h1 style="color: white; text-align: center;">Videos</h1>
+            <video controls width="100%">
+                <source src="Videos/NoLoveLostTrailer.mp4">
+                This browser doesn't support video
+            </video>
+        </a>
+    </div>
+    <!-- End Media Tab -->
+
+
+    <!-- Start Classroom Tab -->
+
+    <div id="Classroom" class="tabcontent">
+        <h1 class="headerline" style="color: white;">Aeries Grades</h1>
+        <p style="color: white;">Check your grades</p>
+    <iframe src="https://coalingahuron.aeries.net/"></iframe>
+
+    <!-- begin semesters -->
+        <h1 style="color: white;">Assignments</h1>
+            <section id="semesters">
+                <!-- begin assignment list -->
+                <a href="Projects/paintingappv3test.html">Painting App</a>
+                <a href="Semester 2/personalizedarray.html">Personalized Array</a>
+                <a href="Semester 2/ClassNotesMarkDown4.md">Markdown 4</a>
+                <a href="Semester 2/ClassNotesMarkDown5.md">Markdown 5</a>
+                <a href="Semester 2/gridareasonyourown.html">Grid Areas - On Your Own</a>
+    </section>
+
+        <h1 class="headerline" style="color: white;">Certificates</h1>
+        <h1 class="headerline" style="color: white;">Work Samples</h1>
+        <iframe 
+            src="https://docs.google.com/document/d/e/2PACX-1vQGxdx49GtSQba_rpz-Gww-97P02JmJ9kwjv4hNpBcp203kZNFvZt6S_6iGp29FduNLdd1QKIYntovd/pub?embedded=true" 
+            width="500" 
+            height="569vh"
+            style="border: none;">
+        </iframe>
+        <iframe 
+            src="https://docs.google.com/presentation/d/e/2PACX-1vQ1oLmxoQXppoFNtabvwmO-BLJARh78a09gl6zaqmz4tGkmcvu2oBVOMGfNhiVYEQQ-QKv8wGMplTVB/embed?start=false&loop=false&delayms=3000"    
+            frameborder="0" 
+            width="960" 
+            height="569" 
+            allowfullscreen="true" 
+            mozallowfullscreen="true" 
+            webkitallowfullscreen="true">
+        </iframe>
+        <iframe 
+            src="https://docs.google.com/presentation/d/e/2PACX-1vScCeEMVNOuheYrXcs5TwAuwx1X-rm12IG46y_C8CUier2ASp_M6SmsuC7jrpWjf0gdN3Ivz72CfAK3/embed?start=false&loop=false&delayms=3000"    
+            frameborder="0" 
+            width="960" 
+            height="569" 
+            allowfullscreen="true" 
+            mozallowfullscreen="true" 
+            webkitallowfullscreen="true">
+        </iframe>
+        <img src="Images/HomePageImages/paintingappimageoriginal.png" alt="Chroma" width="500" height="450">
+        <img src="Images/HomePageImages/paintingappimageversion2.png" alt="Doom" width="900">
+    </div>
+    <!-- end semesters -->
+
+    <!-- End Classroom Tab -->
+
+
+    <!-- Begin Albums Tab -->
+    <div id="Albums" class="tabcontent">
+        <h1 class="headline" style="color: white;">"Without Music, Life Would Be A Mistake" - Friedrich Nietzsche</h1>
+            
+            <a href="https://open.spotify.com/album/7MXxt6ult07PrDraCxb5EK?scrlybrkr=2f5a8d33">
+                <img src="Images/IACFY.png" alt="ILLALWAYSCOMEFINDYOU">
+            </a>
+            <a href="https://open.spotify.com/album/7AwrgenNcTAJlJF3pKL0Qr">
+                <img src="Images/NLL.png" alt="LOVE">
+            </a>
+    </div>
+    <!-- End Albums Tab -->
+
+    <!-- Begin Playlist Tab -->
+    <div id="Playlist" class="tabcontent">
+        <h3 style="color: white;">
+            <ul class="playlist" id="playlist">
+            <li data-src="Music/chosen.mp3" data-cover="Images/CoverArt/ChosenB.png">
+                <img src="Images/CoverArt/ChosenB.png" alt="Cover3" class="cover-art">
+                <div>
+                    <p class="headline">Chosen - BLXST ft. Ty Dolla $ign & Tyga</p>
+                </div>
+            </li>
+            <li data-src="Music/dancewiththedevil.mp3" data-cover="Images/CoverArt/DanceWithTheDevil.png">
+                <img src="Images/CoverArt/DanceWithTheDevil.png" alt="Cover11" class="cover-art">
+                <div>
+                    <p class="headline">Dance With The Devil - BLXST ft. Anderson .Paak</p>
+                </div>
+            </li>
+            <li data-src="Music/longway.mp3" data-cover="Images/CoverArt/INeedYourLove.png">
+                <img src="Images/CoverArt/INeedYourLove.png" alt="Cover14" class="cover-art">
+                <div>
+                    <p class="headline">Long Way - BLXST ft. Amanda Reifer</p>
+                </div>
+            </li>
+            <li data-src="Music/Pressure.mp3" data-cover="Images/CoverArt/ChosenB.png">
+                <img src="Images/CoverArt/ChosenB.png" alt="Cover19" class="cover-art">
+                <div>
+                    <p class="headline">Pressure - BLXST</p>
+                </div> 
+            </li>
+            <li data-src="Music/bealone.mp3" data-cover="Images/CoverArt/ChosenB.png">
+                <img src="Images/CoverArt/ChosenB.png" alt="Cover20" class="cover-art">
+                <div>
+                    <p class="headline">Be Alone - BLXST</p>
+                </div>
+            </li>
+            <li data-src="Music/fakeloveinla.mp3" data-cover="Images/CoverArt/LA.png">
+                <img src="Images/CoverArt/LA.png" alt="Cover27" class="cover-art">
+                <div>
+                    <p class="headline">Fake Love In LA - BLXST</p>
+                </div>
+            </li>
+            <li data-src="Music/selfish.mp3" data-cover="Images/CoverArt/selfish.png">
+                <img src="Images/CoverArt/selfish.png" alt="Cover34" class="cover-art">
+                <div>
+                    <p class="headline">Selfish - BLXST & Bino Rideaux</p>
+                </div>
+            </li>
+            <li data-src="Music/savage.mp3" data-cover="Images/CoverArt/savage.png">
+                <img src="Images/CoverArt/savage.png" alt="Cover36" class="cover-art">
+                <div>
+                    <p class="headline">Savage - BLXST & Bino Rideaux</p>
+                </div>
+            </li>
+            <li data-src="Music/mustbelove.mp3" data-cover="Images/CoverArt/mustbelove.png">
+                <img src="Images/CoverArt/mustbelove.png" alt="Cover37" class="cover-art">
+                <div>
+                    <p class="headline">Must Be Love - BLXST ft. City James & Ventage</p>
+                </div>
+            </li>
+            <li data-src="Music/overrated.mp3" data-cover="Images/CoverArt/overrated.png">
+                <img src="Images/CoverArt/overrated.png" alt="Cover38" class="cover-art">
+                <div>
+                    <p class="headline">Overrated - BLXST</p>
+                </div>
+            </li>
+            <li data-src="Music/nolovelost.mp3" data-cover="Images/CoverArt/chosenB.png">
+                <img src="Images/CoverArt/ChosenB.png" alt="Cover39" class="cover-art">
+                <div>
+                    <p class="headline">No Love Lost - BLXST</p>
+                </div>
+            </li>
+            <li data-src="Music/actlikeyouknow.mp3" data-cover="Images/CoverArt/act.png">
+                <img src="Images/CoverArt/act.png" alt="Cover41" class="cover-art">
+                <div>
+                    <p class="headline">Act Like You Know - BLXST</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- End Playlist Tab -->
+
+
+    <!-- begin subfooter -->
+    <footer id="subfooter">
+        <h1>
+            <div id="subfooter">
+                <a href="https://www.mlb.com/angels?redesign=ticketing">Angels Website</a>
+                <a href="https://www.mlb.com/dodgers?redesign=ticketing">Dodgers Website</a>
+                <a href="https://www.youtube.com/@MLB">YouTube</a>
+                <a href="https://www.mlb.com/events">Events</a>
+                <a href="https://www.mlbshop.com">MLB Store</a>
+        </div>
+    </h1>
+    </footer>
+
+    <div id="customAudioPlayer" class="draggable-player">
+  <button id="prevBtn">⏮</button>
+  <button id="playPauseBtn">▶</button>
+  <input type="range" id="progressBar" value="0" min="0" step="0.1">
+  <button id="nextBtn">⏭</button>
+</div>
+
+
+    <script>
+        function openPage(pageName, elmnt, color) {
+        // Hide all elements with class="tabcontent" by default */
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Remove the background color of all tablinks/buttons
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+        }
+
+        // Show the specific tab content
+        document.getElementById(pageName).style.display = "block";
+
+        // Add the specific color to the button used to open the tab content
+        elmnt.style.backgroundColor = color;
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+
+        
+
+
+        const disclaimer = document.getElementById('disclaimer');
+        const content = document.getElementById('main-content');
+
+        disclaimer.addEventListener('click', () => {
+        disclaimer.classList.add('hide-disclaimer');
+        document.body.style.overflow = 'auto';
+
+        setTimeout(() => {
+        disclaimer.style.display = 'none';
+        content.style.display = 'block';
+        }, 600); // match the animation time
+        });
+
+
+          const playlistItems = document.querySelectorAll('#playlist li');
+  const progressBar = document.getElementById('progressBar');
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  const audio = new Audio();
+  let currentIndex = 0;
+
+  function loadTrack(index) {
+    if (index < 0 || index >= playlistItems.length) return;
+    currentIndex = index;
+    const src = playlistItems[currentIndex].getAttribute('data-src');
+    audio.src = src;
+    audio.play();
+    updateButton();
+    highlightCurrent();
+  }
+
+  function updateButton() {
+    playPauseBtn.textContent = audio.paused ? '▶' : '⏸';
+  }
+
+  function highlightCurrent() {
+    playlistItems.forEach(item => item.classList.remove('current-song'));
+    playlistItems[currentIndex].classList.add('current-song');
+  }
+
+  playPauseBtn.addEventListener('click', () => {
+    if (audio.paused) audio.play();
+    else audio.pause();
+    updateButton();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) loadTrack(currentIndex - 1);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (currentIndex < playlistItems.length - 1) loadTrack(currentIndex + 1);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    progressBar.value = audio.currentTime;
+    progressBar.max = audio.duration;
+  });
+
+  progressBar.addEventListener('input', () => {
+    audio.currentTime = progressBar.value;
+  });
+
+  audio.addEventListener('ended', () => {
+    if (currentIndex < playlistItems.length - 1) loadTrack(currentIndex + 1);
+  });
+
+  playlistItems.forEach((item, index) => {
+    item.addEventListener('click', () => {
+      loadTrack(index);
+    });
+  });
+
+  // Load first track
+  if (playlistItems.length > 0) loadTrack(0);
+
+  document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+      player.style.left = `${e.clientX - offsetX}px`;
+      player.style.top = `${e.clientY - offsetY}px`;
+    }
+  });
+
+  function nextTrack() {
+  currentTrack = (currentTrack + 1) % playlist.length;
+  loadTrack(currentTrack);
+}
+
+function prevTrack() {
+  currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+  loadTrack(currentTrack);
+}
+    </script>
+
+    
+    
+</body>
+</html>
