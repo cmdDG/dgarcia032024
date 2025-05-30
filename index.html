@@ -5,36 +5,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diego Garcia Portfolio</title>
     <style>
+        @font-face {
+            font-family: 'GreaterTheory';
+            src: url('Font/GreaterTheory.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Ethereal';
+            src: url('Font/EtherealDemo-Black.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Guma';
+            src: url('Font/gumarang.italic.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Gum';
+            src: url('Font/gumarang.regular.ttf') format('truetype');
+        }
         body
         {
             background-color: black;
             background-image: url(Images/HomePageImages/background.png);
             background: cover;
+            background-repeat: no-repeat;
+            font-family: 'Gum', sans-serif;
+            font-size: larger;
         }
+    
+        html
+        {
+            scroll-behavior: smooth;
+        }
+        /* Audio Bar */
+        .draggable-player {
+            position: fixed;
+            bottom: -15px;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-top: 2px solid #4e824f;
+            padding: 15px 8px;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            z-index: 9999;
+            padding-top: .3rem;
+        }
+
+        .draggable-player button {
+            background-color: #76ac6d;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+
+        .draggable-player button:hover {
+            background-color: #396746;
+        }
+
+        #progressBar {
+            flex-grow: 1;
+            accent-color: #92bc88;
+        }
+        /* Disclaimer Popup */
+        #disclaimer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
+            backdrop-filter: blur(20px); /* blur everything behind it */
+            color: #F2F2F2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 9999;
+            cursor: pointer;
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+            font-family: 'guma', sans-serif;
+        }
+
+        #disclaimer h1 {
+            color: #A67538;
+            font-size: 5rem;
+            margin-bottom: .5rem;
+        }
+
+        #disclaimer p {
+            font-size: 2rem;
+            max-width: 50%;
+        }
+        #main-content {
+            display: none;
+            padding: 2rem;
+        }
+        .hide-disclaimer {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
         /* Style tab links */
         .tablink {
-            background-color: rgba(0, 0, 0, 0.666);
-            color: white;
+            background-color: rgba(0, 0, 0, 0.33);
+            font-family: 'Ethereal', sans-serif;
+            color: #F2F2F2;
             float: right;
             border: none;
             outline: none;
             cursor: pointer;
-            padding: 10px;
-            font-size: 15px;
-            width: 7%;
         }
         /* Style the tab content (and add height:100% for full page content) */
         .tabcontent {
             color: black;
-            display: none;
-            padding: 30px 20px;
+            display: block;
             height: 100%;
         }
         .tablink:hover{
-            background-color: rgba(56, 56, 56, 0.666)
+            background-color: rgba(56, 56, 56, 0.33)
         }
         .tablink:focus{
-            background-color: rgba(80, 80, 80, 0.555)
+            background-color: rgba(80, 80, 80, 0.33)
         }
         /* Center content inside pageheader, subfooter, media, and semesters */
         #pageheader, #subfooter, #videos, #semesters {
@@ -49,76 +143,76 @@
             
         }
         #semesters{
-            background:rgba(0, 0, 0, 0.666);
+            background:rgba(0, 0, 0, 0.33);
+            font-family: 'gum', sans-serif;
         }
         /* Style links to be centered inside their sections */
         #semesters a{
             display: block;
             margin: 10px 30px; /* Adds spacing between links */
             text-align: center;
-            color: white;
+            color: #F2F2F2;
             text-decoration: none;
             padding: 1rem;
         }
         #pageheader
         {
-            background-color: rgba(0, 0, 0, 0.666);
+            background-color: rgba(0, 0, 0, 0.33);
         }
         #videos
         {
-            background-color: rgba(0, 0, 0, 0.666);
+            background-color: rgba(0, 0, 0, 0.33);
         }
 
         #subfooter
         {
-            background-color: rgba(0, 0, 0, 0.666);
-            color: white;
+            background-color: rgba(0, 0, 0, 0.1);
+            color:none;
+            height: 5rem;
         }
         #subfooter a:link, a:visited
         {
-            color: white;
+            color: #F2F2F2;
             text-decoration: none;
+            font-family: 'Ethereal', sans-serif;
+            font-size: x-large;
         }
         /* Media Tab */
         #Media
         {
-            background-color: rgba(0, 0, 0, 0.666);
+            background-color: rgba(0, 0, 0, 0.33);
         }
         #Media img {
             width: 100%; /* Make images responsive */
             max-width: 320px; /* Set a maximum width */
             height: auto; /* Maintain aspect ratio */
             margin: 1px; /* Center images */
+            margin-top: 4rem;
         }
-        /* Playlist Tab */
-        /*Playlist Style*/
+        /*Playlist Tab & Style*/
         .playlist {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 5px;
             list-style: none;
-            padding: 0;
+            border-radius: 50%;
         }
 
-        .playlist li {
+        .playlist li{
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.666);
-            border: 1px solid #d1af47;
-            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.33);
+            border: 1px solid #F2F2F2;
             cursor: pointer;
         }
 
         .playlist li:hover {
-            background-color: #f0f0f0;
+            background-color: #1c388c7f;
         }
 
         .cover-art {
-            width: 50px;
-            height: 50px;
-            border-radius: 5px;
+            width: 15%;
+            height: auto;
             object-fit: cover;
         }
 
@@ -126,16 +220,19 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            font-family: 'GreatherTheory', sans-serif;
         }
 
         .current-song {
-            color: #00ffe1;
+            color: #BF212E;
             font-weight: bold;
         }
         /* Albums Tab */
         #Albums
         {
-            background-color: rgba(0, 0, 0, 0.666);
+            background-color: rgba(0, 0, 0, 0.33);
+            font-family: 'Guma', sans-serif;
+            text-align: center;
         }
         #Albums img {
             width: 100%; /* Makes the image responsive */
@@ -143,10 +240,13 @@
             height: auto; /* Maintains aspect ratio */
             padding-left: 5rem;
         }
+        #Albums a:link, a:visited{
+            color: black;
+        }
         /* Classroom Tab */
         #Classroom
         {
-            background-color: rgba(0, 0, 0, 0.666);
+            background-color: rgba(0, 0, 0, 0.33);
         }
         @media screen and (max-width:480px)
         {
@@ -158,25 +258,31 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
+        }.tablink
+            {
+                float: right;
+                width: 5%;
+                font-size: 8px;
+            }
         }
         @media screen and (min-width:480px) 
         {
-            .tablink
-            {
-                float: right;
-                width: 20%;
-                padding: 8px;
+            
+            .tabcontent {
+            color: black;
+            display: none;
+            padding: 3px 2px;
+            height: 80%;
             }
             #Albums img {
-            max-width: 100%; /* Prevents the image from being too large */
-            height: auto; /* Maintains aspect ratio */
+                max-width: 80%; /* Prevents the image from being too large */
+                height: auto;
+                padding-left: 2rem;
             }
-            
         .playlist li {
             display: flex;
             align-items: center;
-            border: 1px solid #d1af47;
+            border: 1px solid #63009E;
         }
         }
         @media screen and (min-width:768px) 
@@ -184,8 +290,9 @@
             .tablink
             {
                 float: right;
-                width: 20%;
-                padding: 8px;
+                width: 8%;
+                padding: 3px;
+                font-size: 12px;
             }
             
             #Albums img {
@@ -201,7 +308,7 @@
             gap: 2px;
             padding: 1px;
             background-color: none;
-            border: 1px solid #d1af47;
+            border: 1px solid #63009E;
             cursor: pointer;
         }
         .playlist li div
@@ -215,7 +322,8 @@
             {
                 float: right;
                 width: 20%;
-                padding: 8px;
+                font-size: large;
+                height: 3rem;
             }
             iframe {
                 width: 100%; /* Make it responsive */
@@ -229,22 +337,31 @@
         }
         .playlist li {
             display: flex;
-            align-items: center;
             gap: 4px;
-            padding: 4px;
             background-color: none;
-            border: 1px solid #d1af47;
+            border: 2px solid #2CA4BF;
             cursor: pointer;
         }
         }
     </style>
 </head>
 <body>
+    <div id="disclaimer">
+        <h1>Disclaimer!</h1>
+            <p>
+                The following web page you are about to view contains media and elements that aren't owned by the district or class itself. Keep in mind that they are used for educational purposes only!  If you please you can support the owners by finding them on social media and their work. Thank you for choosing to view this webpage and exploring the work, passion, and effort has been put here for display. Enjoy!
+            </p>
+            <p>
+                Click anywhere to continue
+            </p>
+            
+    </div>
+
     <!-- Start Tabs -->
-    <button class="tablink" onclick="openPage('Classroom')" id="">Classroom</button>
+    <button class="tablink" onclick="openPage('Classroom')">Classroom</button>
     <button class="tablink" onclick="openPage('Albums')">Albums</button>
     <button class="tablink" onclick="openPage('Playlist')">Playlist</button>
-    <button class="tablink" onclick="openPage('Media')" id="">Media</button>
+    <button class="tablink" onclick="openPage('Media')">Media</button>
     <button class="tablink" onclick="openPage('Home')" id="defaultOpen">Home</button>
     <!-- End Tabs -->
 
@@ -260,50 +377,22 @@
 
     <!-- begin videos -->
     <div id="videos">
-        <h2 style="color: white;">
+        <h2 style="color: #F2F2F2;">
             <p>"Just because I'm alone doesn't mean I'm lonely. Being true to myself means accepting some paths are walked alone." - Huey Freeman</p>
         </h2>
-        <!-- Videos -->
-        
-    </div>
-    <!-- End videos -->
 
-    <!-- begin semesters -->
-    <section id="semesters">
-        <h2 style="color: white;">Assignments</h2>
-        <!-- begin assignment list -->
-                <a href="Projects/paintingappv3test.html">Painting App</a>
-                <a href="Semester 2/personalizedarray.html">Personalized Array</a>
-                <a href="Semester 2/ClassNotesMarkDown4.md">Markdown 4</a>
-                <a href="Semester 2/ClassNotesMarkDown5.md">Markdown 5</a>
-                <a href="Semester 2/gridareas.html">Grid Areas - On Your Own</a>
-                <a href="Semester 2/JourneyToMars/index.html">HTML Forms</a>
-                <a href="Demos/HTMLForms/htmlformss.html">Journey To Mars</a>
-    </section>
-    <!-- end semesters -->
+        <p style="color: #F2F2F2;">Hello visitor, my name is Diego Garcia and I am a student in Coalinga High School. My road to success can be foggy but the road clears for a promising future willed with accomplishments and wonders for improvement. I have a range of skill and talent that can be converted into many forms of bussinesses or study with the ever growing industry of online work. This is my portoflio for my class in Web App Developement after persuing my interest in web coding with a bit of prior experience. My dream job can vary in both cost and pay, but all land in either Automotive, Entertainment, and Tech industry. I can best describe myself as an innovative and creative worker.</p>
 
-    <!-- begin subfooter -->
-    <footer id="subfooter">
-        <h2>
-            <div id="subfooter">
-        <a href="https://chagoyan.com">Chagoyan Website</a>
-        |
-        <a href="https://youtube.com">YouTube</a>
-        |
-        <a href="https://classroom.google.com/h">Google Classroom</a>
+    
             </div>
-        </h2>
-    </footer>
-</div>
-    </div>
         </div>
-        
+    </div>
     
     <!-- End Home Tab -->
 
     <!-- Start Media Tab -->
-<div id="Media" class="tabcontent">
-    <h1 style="color: white; text-align: center;">Videos</h1>
+    <div id="Media" class="tabcontent">
+        <h1 style="color: #F2F2F2; text-align: center;">Videos</h1>
             <video controls width="100%">
                 <source src="Videos/BIBLETrailer.mp4">
                 This browser doesn't support video
@@ -320,325 +409,503 @@
                 <source src="Videos/TakeCareTrailer.mp4">
                 This browser doesn't support video
             </video>
-    <h1 style="color: white; text-align: center;">Movies</h1>
-    <img src="Images/MovieArt/TokyoDrift.png" alt="TokyoDrift">
-    <img src="Images/MovieArt/Compton.png" alt="Compton">
-    <img src="Images/MovieArt/IntoSpiderVerse.png" alt="IntoSpiderVerse">
-    <img src="Images/MovieArt/SpiritedAway.png" alt="SpiritedAway"">
-    <h1 style="color: white; text-align: center;" >Shows</h1>
-    <img src="Images/ShowArt/InitialD.png" alt="InitialD"">
-    <img src="Images/ShowArt/LOLA.png" alt="LeagueOfLegendsArcane"">
-    <img src="Images/ShowArt/SPTO.png" alt="ScottPilgrimTakesOff"">
-    <img src="Images/ShowArt/TBD.png" alt="TheBoonDocks"">
-</div>
+        <h1 style="color: #F2F2F2; text-align: center;">Movies</h1>
+        <a href="https://www.amazon.com/gp/video/detail/amzn1.dv.gti.b2a9f667-0999-214b-4450-2a6122bb1a1b?ref_=imdbref_tt_wbr_ovf__pvt_aiv&tag=imdbtag_tt_wbr_ovf__pvt_aiv-20">
+            <img src="Images/MovieArt/TokyoDrift.png" alt="TokyoDrift">
+        </a>
+        <a href="https://www.amazon.com/Straight-Outta-Compton-OShea-Jackson/dp/B013WF4XW0">
+            <img src="Images/MovieArt/Compton.png" alt="Compton">
+        </a>
+        <a href="https://www.amazon.com/gp/video/detail/amzn1.dv.gti.8cb3d0d2-8276-69ba-e66b-f200871aacf7?ref_=imdbref_tt_wbr_ovf__pvt_aiv&tag=imdbtag_tt_wbr_ovf__pvt_aiv-20">
+            <img src="Images/MovieArt/IntoSpiderVerse.png" alt="IntoSpiderVerse">
+        </a>
+        <a href="https://www.amazon.com/gp/video/detail/amzn1.dv.gti.c4b73428-e601-ad76-a34a-5ed91bfabbab?ref_=imdbref_tt_ov_tsp_pvt_aiv&tag=imdbtag_tt_ov_tsp_pvt_aiv-20">
+            <img src="Images/MovieArt/SpiritedAway.png" alt="SpiritedAway">
+        </a>
+        <h1 style="color: #F2F2F2; text-align: center;" >Shows</h1>
+        <a href="https://www.primevideo.com/detail/Initial-D/0JNHZR0YDTP7SSDXHNIBIZINCM">
+            <img src="Images/ShowArt/InitialD.png" alt="InitialD">
+        </a>
+        <a href="https://www.netflix.com/title/81435684">
+            <img src="Images/ShowArt/LOLA.png" alt="LeagueOfLegendsArcane">
+        </a>
+        <a href="https://www.netflix.com/title/81153115">
+            <img src="Images/ShowArt/SPTO.png" alt="ScottPilgrimTakesOff">
+        </a>
+        <a href="https://www.max.com/shows/boondocks/c43c65e7-49fe-4795-9e13-759bad094a78">
+            <img src="Images/ShowArt/TBD.png" alt="TheBoonDocks">
+        </a>
+    </div>
     <!-- End Media Tab -->
 
 
     <!-- Start Classroom Tab -->
 
-<div id="Classroom" class="tabcontent">
-    <h1 style="color: white;">Aeries Grades</h1>
-  <p style="color: white;">Check your grades</p>
-  <iframe src="https://coalingahuron.aeries.net/"></iframe>
-  
-</div>
+    <div id="Classroom" class="tabcontent">
+        <h1 class="headerline" style="color: #F2F2F2;">Aeries Grades</h1>
+        <p style="color: #F2F2F2;">Check your grades</p>
+    <iframe src="https://coalingahuron.aeries.net/"></iframe>
+
+    <!-- begin semesters -->
+        <h1 style="color: #F2F2F2;">Assignments</h1>
+            <section id="semesters">
+                <!-- begin assignment list -->
+                <a href="Projects/paintingappv3test.html">Painting App</a>
+                <a href="Semester 2/personalizedarray.html">Personalized Array</a>
+                <a href="Semester 2/ClassNotesMarkDown4.md">Markdown 4</a>
+                <a href="Semester 2/ClassNotesMarkDown5.md">Markdown 5</a>
+                <a href="Semester 2/gridareasonyourown.html">Grid Areas - On Your Own</a>
+                <a href="logos.html">Logos - Senior Toad Summit</a>
+                <a href="Demos/Switch/switch.html">Switch</a>
+    </section>
+
+        <h1 class="headerline" style="color: #F2F2F2;">Certificates</h1>
+        <h1 class="headerline" style="color: #F2F2F2;">Work Samples</h1>
+        <iframe 
+            src="https://docs.google.com/document/d/e/2PACX-1vQGxdx49GtSQba_rpz-Gww-97P02JmJ9kwjv4hNpBcp203kZNFvZt6S_6iGp29FduNLdd1QKIYntovd/pub?embedded=true" 
+            width="500" 
+            height="569vh"
+            style="border: none;">
+        </iframe>
+        <iframe 
+            src="https://docs.google.com/presentation/d/e/2PACX-1vQ1oLmxoQXppoFNtabvwmO-BLJARh78a09gl6zaqmz4tGkmcvu2oBVOMGfNhiVYEQQ-QKv8wGMplTVB/embed?start=false&loop=false&delayms=3000"    
+            frameborder="0" 
+            width="960" 
+            height="569" 
+            allowfullscreen="true" 
+            mozallowfullscreen="true" 
+            webkitallowfullscreen="true">
+        </iframe>
+        <iframe 
+            src="https://docs.google.com/presentation/d/e/2PACX-1vScCeEMVNOuheYrXcs5TwAuwx1X-rm12IG46y_C8CUier2ASp_M6SmsuC7jrpWjf0gdN3Ivz72CfAK3/embed?start=false&loop=false&delayms=3000"    
+            frameborder="0" 
+            width="960" 
+            height="569" 
+            allowfullscreen="true" 
+            mozallowfullscreen="true" 
+            webkitallowfullscreen="true">
+        </iframe>
+        <img src="Images/HomePageImages/paintingappimageoriginal.png" alt="Chroma" width="500" height="450">
+        <img src="Images/HomePageImages/paintingappimageversion2.png" alt="Doom" width="900">
+    </div>
+    <!-- end semesters -->
 
     <!-- End Classroom Tab -->
 
 
     <!-- Begin Albums Tab -->
-<div id="Albums" class="tabcontent">
-    <h1 class="headline" style="color: white;">"Without Music, Life Would Be A Mistake" - Friedrich Nietzsche</h1>
-            <a href="https://open.spotify.com/album/0ZjOFfItjIA9YbzhERRIBr?scrlybrkr=2f5a8d33" target="_blank">
+    <div id="Albums" class="tabcontent">
+        <h1 class="headline" style="color: #F2F2F2;">"Without Music, Life Would Be A Mistake" - Friedrich Nietzsche</h1>
+            <a href="https://open.spotify.com/album/0ZjOFfItjIA9YbzhERRIBr?scrlybrkr=2f5a8d33">
                 <img src="Images/SSD.png" alt="STILLSLEEPDELUXE">
             </a>
-            <a href="https://open.spotify.com/album/2x6s7ooABaADFz7ZTbuAMG?scrlybrkr=2f5a8d33" target="_blank">
+            <a href="https://open.spotify.com/album/2x6s7ooABaADFz7ZTbuAMG?scrlybrkr=2f5a8d33">
                 <img src="Images/TE.png" alt="THEECSTATIC">
             </a>
-            <a href="https://open.spotify.com/album/3Xvvi8uwGnuj9nF7fr2h39?scrlybrkr=2f5a8d33" target="_blank">
+            <a href="https://open.spotify.com/album/3Xvvi8uwGnuj9nF7fr2h39?scrlybrkr=2f5a8d33">
                 <img src="Images/TULK.png" alt="THEUNLUCCYLUCCYKID">
             </a>
-            <a href="https://open.spotify.com/album/7MXxt6ult07PrDraCxb5EK?scrlybrkr=2f5a8d33" target="_blank">
+            <a href="https://open.spotify.com/album/7MXxt6ult07PrDraCxb5EK?scrlybrkr=2f5a8d33">
                 <img src="Images/IACFY.png" alt="ILLALWAYSCOMEFINDYOU">
             </a>
-            <a href="https://open.spotify.com/album/0UMMIkurRUmkruZ3KGBLtG" target="_blank">
+            <a href="https://open.spotify.com/album/0UMMIkurRUmkruZ3KGBLtG">
                 <img src="Images/2014FHD.png" alt="COLE">
             </a>
-            <a href="https://open.spotify.com/album/3KRqTwjYtuR11MnyM3X2xL" target="_blank">
+            <a href="https://open.spotify.com/album/3KRqTwjYtuR11MnyM3X2xL">
                 <img src="Images/222.png" alt="TJ">
             </a>
-            <a href="https://open.spotify.com/album/6idVoBWP2mt1qoMtASm3gc" target="_blank">
+            <a href="https://open.spotify.com/album/6idVoBWP2mt1qoMtASm3gc">
                 <img src="Images/T13OO.png" alt="CURRY">
             </a>
-            <a href="https://open.spotify.com/album/1M1i7i0G5g0bhQIoyXeqJN" target="_blank">
+            <a href="https://open.spotify.com/album/1M1i7i0G5g0bhQIoyXeqJN">
                 <img src="Images/PAL2.png" alt="FIVI">
             </a>
-            <a href="https://open.spotify.com/album/39xhYyNNDatQtgKw2KdXMz" target="_blank">
+            <a href="https://open.spotify.com/album/39xhYyNNDatQtgKw2KdXMz">
                 <img src="Images/TG.png" alt="POLO">
             </a>
-            <a href="https://open.spotify.com/album/4UNZOq7e8WjnfaYm2rkltE" target="_blank">
+            <a href="https://open.spotify.com/album/4UNZOq7e8WjnfaYm2rkltE">
                 <img src="Images/TS.png" alt="SNOT">
             </a>
-            <a href="https://open.spotify.com/album/4ycNE7y1rp5215g1kkqk1P" target="_blank">
+            <a href="https://open.spotify.com/album/4ycNE7y1rp5215g1kkqk1P">
                 <img src="Images/GRODT.png" alt="CENT">
             </a>
-            <a href="https://open.spotify.com/album/79ONNoS4M9tfIA1mYLBYVX" target="_blank">
+            <a href="https://open.spotify.com/album/79ONNoS4M9tfIA1mYLBYVX">
                 <img src="Images/MMATBS.png" alt="KDOT">
             </a>
-            <a href="https://open.spotify.com/album/3AxYGUXCG9OmZT5fiRAwJi" target="_blank">
+            <a href="https://open.spotify.com/album/3AxYGUXCG9OmZT5fiRAwJi">
                 <img src="Images/SE.png" alt="SLOBE">
             </a>
-            <a href="https://open.spotify.com/album/6LU7SYL9BWAt3TgEK4DdAc" target="_blank">
+            <a href="https://open.spotify.com/album/6LU7SYL9BWAt3TgEK4DdAc">
                 <img src="Images/TC.png" alt="BIGX">
             </a>
-            <a href="https://open.spotify.com/album/261LWEVYViMXijB95mAty3" target="_blank">
+            <a href="https://open.spotify.com/album/261LWEVYViMXijB95mAty3">
                 <img src="Images/2000.png" alt="JOEY">
             </a>
-            <a href="https://open.spotify.com/album/1ep4OEfNOhvcY85STfEtKy" target="_blank">
+            <a href="https://open.spotify.com/album/1ep4OEfNOhvcY85STfEtKy">
                 <img src="Images/JM.png" alt="JACK">
             </a>
-            <a href="https://open.spotify.com/album/7nTvm6EgmFWPLMLxj6aksS" target="_blank">
+            <a href="https://open.spotify.com/album/7nTvm6EgmFWPLMLxj6aksS">
                 <img src="Images/WLYT2.png" alt="WELOVE">
             </a>
-            <a href="https://open.spotify.com/album/6uGkCKnoTS641tt07DPiA2" target="_blank">
-                <img src="Images/PIR.png" alt="ELI">
+            <a href="https://open.spotify.com/album/7AwrgenNcTAJlJF3pKL0Qr">
+                <img src="Images/NLL.png" alt="LOVE">
             </a>
-</div>
-<!-- End Albums Tab -->
+    </div>
+    <!-- End Albums Tab -->
 
-<!-- Begin Playlist Tab -->
-<div id="Playlist" class="tabcontent">
-    <h3 style="color: white;">
-        <ul class="playlist" id="playlist">
+    <!-- Begin Playlist Tab -->
+    <div id="Playlist" class="tabcontent">
+        <h3 style="color: #F2F2F2;">
+            <ul class="playlist" id="playlist">
             <li data-src="Music/bigsteppa.mp3" data-cover="Images/CoverArt/BigSteppa.png">
                 <img src="Images/CoverArt/BigSteppa.png" alt="Cover1" class="cover-art">
                 <div>
-                    <b>Big Steppa - Lil Pete ft. Pahp</b>
+                    <p class="headline">Big Steppa - Lil Pete ft. Pahp</p>
                 </div>
             </li>
             <li data-src="Music/thankful.mp3" data-cover="Images/CoverArt/Thankful.png">
                 <img src="Images/CoverArt/Thankful.png" alt="Cover2" class="cover-art">
                 <div>
-                    <b>Thankful - Lil Pete</b>
+                    <p class="headline">Thankful - Lil Pete</p>
                 </div>
             </li>
             <li data-src="Music/chosen.mp3" data-cover="Images/CoverArt/ChosenB.png">
                 <img src="Images/CoverArt/ChosenB.png" alt="Cover3" class="cover-art">
                 <div>
-                    <b>Chosen - BLXST ft. Ty Dolla $ign & Tyga</b>
+                    <p class="headline">Chosen - BLXST ft. Ty Dolla $ign & Tyga</p>
                 </div>
             </li>
             <li data-src="Music/2055.mp3" data-cover="Images/CoverArt/2055.png">
                 <img src="Images/CoverArt/2055.png" alt="Cover4" class="cover-art">
                 <div>
-                    <b>2055 - Sleepy Hallow</b>
+                    <p class="headline">2055 - Sleepy Hallow</p>
                 </div>
             </li>
             <li data-src="Music/forever.mp3" data-cover="Images/CoverArt/Forever.png">
                 <img src="Images/CoverArt/Forever.png" alt="Cover5" class="cover-art">
                 <div>
-                    <b>Forever - Tommy Ice</b>
+                    <p class="headline">Forever - Tommy Ice</p>
                 </div>
             </li>
             <li data-src="Music/streetsdontloveyou.mp3" data-cover="Images/CoverArt/StreetsDontLoveYou.png">
                 <img src="Images/CoverArt/StreetsDontLoveYou.png" alt="Cover6" class="cover-art">
                 <div>
-                    <b>Streets Don't Love You - EBK Young Joc</b>
+                    <p class="headline">Streets Don't Love You - EBK Young Joc</p>
+                </div>
+            </li>
+            <li data-src="Music/diehard.mp3" data-cover="Images/CoverArt/CountMeOut.png">
+                <img src="Images/CoverArt/CountMeOut.png" alt="Cover7" class="cover-art">
+                <div>
+                    <p class="headline">Die Hard - Kendrick Lamar ft. BLXST & Amanda Reifer</p>
                 </div>
             </li>
             <li data-src="Music/alright.mp3" data-cover="Images/CoverArt/Alright.png">
                 <img src="Images/CoverArt/Alright.png" alt="Cover8" class="cover-art">
                 <div>
-                    <b>Alright - Kendrick Lamar</b>
+                    <p class="headline">Alright - Kendrick Lamar</p>
                 </div>
             </li>
             <li data-src="Music/needme.mp3" data-cover="Images/CoverArt/TEC.png">
                 <img src="Images/CoverArt/TEC.png" alt="Cover9" class="cover-art">
                 <div>
-                    <b>Need Me - Lil Tecca</b>
+                    <p class="headline">Need Me - Lil Tecca</p>
                 </div>
             </li>
             <li data-src="Music/trippinonu.mp3" data-cover="Images/CoverArt/TEC.png">
                 <img src="Images/CoverArt/TEC.png" alt="Cover10" class="cover-art">
                 <div>
-                    <b>Trippin' On U - Lil Tecca</b>
+                    <p class="headline">Trippin' On U - Lil Tecca</p>
                 </div>
             </li>
             <li data-src="Music/dancewiththedevil.mp3" data-cover="Images/CoverArt/DanceWithTheDevil.png">
-                <img src="Images/CoverArt/DanceWithTheDevil.png" alt="Cover12" class="cover-art">
+                <img src="Images/CoverArt/DanceWithTheDevil.png" alt="Cover11" class="cover-art">
                 <div>
-                    <b>Dance With The Devil - BLXST ft. Anderson .Paak</b>
+                    <p class="headline">Dance With The Devil - BLXST ft. Anderson .Paak</p>
                 </div>
             </li>
             <li data-src="Music/changeme.mp3" data-cover="Images/CoverArt/ChangeMe.png">
-                <img src="Images/CoverArt/ChangeMe.png" alt="Cover13" class="cover-art">
+                <img src="Images/CoverArt/ChangeMe.png" alt="Cover12" class="cover-art">
                 <div>
-                    <b>Change Me - BigXThaPlug</b>
+                    <p class="headline">Change Me - BigXThaPlug</p>
                 </div>
             </li>
             <li data-src="Music/therapysession.mp3" data-cover="Images/CoverArt/TherapySession.png">
-                <img src="Images/CoverArt/TherapySession.png" alt="Cover14" class="cover-art">
+                <img src="Images/CoverArt/TherapySession.png" alt="Cover13" class="cover-art">
                 <div>
-                    <b>Therapy Session - BigXThaPlug</b>
+                    <p class="headline">Therapy Session - BigXThaPlug</p>
                 </div>
             </li>
             <li data-src="Music/longway.mp3" data-cover="Images/CoverArt/INeedYourLove.png">
-                <img src="Images/CoverArt/INeedYourLove.png" alt="Cover15" class="cover-art">
+                <img src="Images/CoverArt/INeedYourLove.png" alt="Cover14" class="cover-art">
                 <div>
-                    <b>Long Way - BLXST ft. Amanda Reifer</b>
+                    <p class="headline">Long Way - BLXST ft. Amanda Reifer</p>
                 </div>
             </li>
             <li data-src="Music/flashinglights.mp3" data-cover="Images/CoverArt/KanyeWest.png">
-                <img src="Images/CoverArt/KanyeWest.png" alt="Cover17" class="cover-art">
+                <img src="Images/CoverArt/KanyeWest.png" alt="Cover15" class="cover-art">
                 <div>
-                    <b>Flashing Lights - Kanye West ft. Dwele</b>
+                    <p class="headline">Flashing Lights - Kanye West ft. Dwele</p>
                 </div>
             </li>
             <li data-src="Music/homecoming.mp3" data-cover="Images/CoverArt/KanyeWest.png">
-                <img src="Images/CoverArt/KanyeWest.png" alt="Cover19" class="cover-art">
+                <img src="Images/CoverArt/KanyeWest.png" alt="Cover17" class="cover-art">
                 <div>
-                    <b>Homecoming - Kanye West ft. Chris Martin</b>
+                    <p class="headline">Homecoming - Kanye West ft. Chris Martin</p>
                 </div>
             </li>
             <li data-src="Music/Pomme.mp3" data-cover="Images/CoverArt/Stromae.png">
-                <img src="Images/CoverArt/Stromae.png" alt="Cover22" class="cover-art">
+                <img src="Images/CoverArt/Stromae.png" alt="Cover18" class="cover-art">
                 <div>
-                    <b>Ma Meilleure Ennemie - Stromae ft. Pomme</b>
+                    <p class="headline">Ma Meilleure Ennemie - Stromae ft. Pomme</p>
                 </div>
             </li>
-            </li>
             <li data-src="Music/Pressure.mp3" data-cover="Images/CoverArt/ChosenB.png">
-                <img src="Images/CoverArt/ChosenB.png" alt="Cover23" class="cover-art">
+                <img src="Images/CoverArt/ChosenB.png" alt="Cover19" class="cover-art">
                 <div>
-                    <b>Pressure - BLXST</b>
+                    <p class="headline">Pressure - BLXST</p>
                 </div> 
             </li>
-            </li>
-            <li data-src="Music/be alone.mp3" data-cover="Images/CoverArt/ChosenB.png">
-                <img src="Images/CoverArt/ChosenB.png" alt="Cover24" class="cover-art">
+            <li data-src="Music/bealone.mp3" data-cover="Images/CoverArt/ChosenB.png">
+                <img src="Images/CoverArt/ChosenB.png" alt="Cover20" class="cover-art">
                 <div>
-                    <b>Be Alone - BLXST</b>
+                    <p class="headline">Be Alone - BLXST</p>
                 </div>
             </li>
             <li data-src="Music/wantitbad.mp3" data-cover="Images/CoverArt/TEC.png">
-                <img src="Images/CoverArt/TEC.png" alt="Cover25" class="cover-art">
+                <img src="Images/CoverArt/TEC.png" alt="Cover21" class="cover-art">
                 <div>
-                    <b>Want It Bad - Lil Tecca</b>
-                </div>
-            </li>
-            <li data-src="Music/realdiscussions.mp3" data-cover="Images/CoverArt/TEC.png">
-                <img src="Images/CoverArt/TEC.png" alt="Cover26" class="cover-art">
-                <div>
-                    <b>Real Discussions - Lil Tecca</b>
+                    <p class="headline">Want It Bad - Lil Tecca</p>
                 </div>
             </li>
             <li data-src="Music/TheyDontLoveIt.mp3" data-cover="Images/CoverArt/Harlow.png">
-                <img src="Images/CoverArt/Harlow.png" alt="Cover28" class="cover-art">
+                <img src="Images/CoverArt/Harlow.png" alt="Cover24" class="cover-art">
                 <div>
-                    <b>They Don't Love It - Jack Harlow</b>
-                </div>
-            </li>
-            <li data-src="Music/Same24.mp3" data-cover="Images/CoverArt/24.png">
-                <img src="Images/CoverArt/24.png" alt="Cover29" class="cover-art">
-                <div>
-                    <b>Same 24 - Fivio Foreign ft. Meek Mill</b>
+                    <p class="headline">They Don't Love It - Jack Harlow</p>
                 </div>
             </li>
             <li data-src="Music/Stressed.mp3" data-cover="Images/CoverArt/Stressed.png">
-                <img src="Images/CoverArt/Stressed.png" alt="Cover30" class="cover-art">
+                <img src="Images/CoverArt/Stressed.png" alt="Cover26" class="cover-art">
                 <div>
-                    <b>Stressed - Lil Tjay ft. Summer Walker</b>
-                </div>
-            </li>
-            <li data-src="Music/selfish.mp3" data-cover="Images/CoverArt/selfish.png">
-                <img src="Images/CoverArt/selfish.png" alt="Cover31" class="cover-art">
-                <div>
-                    <b>Selfish - BLXST ft. Bino Rideaux</b>
+                    <p class="headline">Stressed - Lil Tjay ft. Summer Walker</p>
                 </div>
             </li>
             <li data-src="Music/fakeloveinla.mp3" data-cover="Images/CoverArt/LA.png">
-                <img src="Images/CoverArt/LA.png" alt="Cover32" class="cover-art">
+                <img src="Images/CoverArt/LA.png" alt="Cover27" class="cover-art">
                 <div>
-                    <b>Fake Love In LA - BLXST</b>
-                </div>
-            </li>
-            <li data-src="Music/snot.mp3" data-cover="Images/CoverArt/Snot.png">
-                <img src="Images/CoverArt/Snot.png" alt="Cover33" class="cover-art">
-                <div>
-                    <b>Blue Moon - $NOT ft. Teddi Jones</b>
+                    <p class="headline">Fake Love In LA - BLXST</p>
                 </div>
             </li>
             <li data-src="Music/darkthoughts.mp3" data-cover="Images/CoverArt/dark.png">
-                <img src="Images/CoverArt/dark.png" alt="Cover35" class="cover-art">
+                <img src="Images/CoverArt/dark.png" alt="Cover30" class="cover-art">
                 <div>
-                    <b>Dark Thoughts - Lil Tecca</b>
+                    <p class="headline">Dark Thoughts - Lil Tecca</p>
+                </div>
+            </li>
+            <li data-src="Music/stuckinadream.mp3" data-cover="Images/CoverArt/stuckinadream.png">
+                <img src="Images/CoverArt/stuckinadream.png" alt="Cover32" class="cover-art">
+                <div>
+                    <p class="headline">Stuck In A Dream - Lil Mosey ft. Gunna</p>
+                </div>
+            </li>
+            <li data-src="Music/selfish.mp3" data-cover="Images/CoverArt/selfish.png">
+                <img src="Images/CoverArt/selfish.png" alt="Cover34" class="cover-art">
+                <div>
+                    <p class="headline">Selfish - BLXST & Bino Rideaux</p>
+                </div>
+            </li>
+            <li data-src="Music/savage.mp3" data-cover="Images/CoverArt/savage.png">
+                <img src="Images/CoverArt/savage.png" alt="Cover36" class="cover-art">
+                <div>
+                    <p class="headline">Savage - BLXST & Bino Rideaux</p>
+                </div>
+            </li>
+            <li data-src="Music/mustbelove.mp3" data-cover="Images/CoverArt/mustbelove.png">
+                <img src="Images/CoverArt/mustbelove.png" alt="Cover37" class="cover-art">
+                <div>
+                    <p class="headline">Must Be Love - BLXST ft. City James & Ventage</p>
+                </div>
+            </li>
+            <li data-src="Music/overrated.mp3" data-cover="Images/CoverArt/overrated.png">
+                <img src="Images/CoverArt/overrated.png" alt="Cover38" class="cover-art">
+                <div>
+                    <p class="headline">Overrated - BLXST</p>
+                </div>
+            </li>
+            <li data-src="Music/nolovelost.mp3" data-cover="Images/CoverArt/chosenB.png">
+                <img src="Images/CoverArt/ChosenB.png" alt="Cover39" class="cover-art">
+                <div>
+                    <p class="headline">No Love Lost - BLXST</p>
+                </div>
+            </li>
+            <li data-src="Music/muscle.mp3" data-cover="Images/CoverArt/Muscle.png">
+                <img src="Images/CoverArt/Muscle.png" alt="Cover40" class="cover-art">
+                <div>
+                    <p class="headline">Muscle - Young SloBe</p>
+                </div>
+            </li>
+            <li data-src="Music/basketballdreams.mp3" data-cover="Images/CoverArt/basketball.png">
+                <img src="Images/CoverArt/basketball.png" alt="Cover41" class="cover-art">
+                <div>
+                    <p class="headline">Basketball Dreams (Remix) - Sleepy Hallow ft. Eli Fross</p>
+                </div>
+            </li>
+            <li data-src="Music/actlikeyouknow.mp3" data-cover="Images/CoverArt/act.png">
+                <img src="Images/CoverArt/act.png" alt="Cover41" class="cover-art">
+                <div>
+                    <p class="headline">Act Like You Know - BLXST</p>
                 </div>
             </li>
         </ul>
+    </div>
+    <!-- End Playlist Tab -->
 
-        <audio id="audioPlayer" controls></audio>
-<!-- End Playlist Tab -->
+
+    <!-- begin subfooter -->
+    <footer id="subfooter">
+        <h1>
+            <div id="subfooter">
+                <a href="https://chagoyan.com">Chagoyan Website</a>
+                <a href="https://github.com/">GitHub</a>
+                <a href="https://youtube.com">YouTube</a>
+                <a href="https://www.chusd.org/events?start_date=2024-10-01&end_date=2024-10-31&view=cal-month&section_ids=251707,321486,321485">CHS Events</a>
+                <a href="credits.html">Credits</a>
+        </div>
+    </h1>
+    </footer>
+
+    <div id="customAudioPlayer" class="draggable-player">
+  <button id="prevBtn">⏮</button>
+  <button id="playPauseBtn">▶</button>
+  <input type="range" id="progressBar" value="0" min="0" step="0.1">
+  <button id="nextBtn">⏭</button>
+</div>
+
 
     <script>
         function openPage(pageName, elmnt, color) {
-  // Hide all elements with class="tabcontent" by default */
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-
-  // Remove the background color of all tablinks/buttons
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].style.backgroundColor = "";
-  }
-
-  // Show the specific tab content
-  document.getElementById(pageName).style.display = "block";
-
-  // Add the specific color to the button used to open the tab content
-  elmnt.style.backgroundColor = color;
-}
-
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
-
-// PlayList Script
-const playlist = document.getElementById('playlist');
-        const audioPlayer = document.getElementById('audioPlayer');
-        let currentSongIndex = 0;
-
-        const songs = Array.from(playlist.children);
-
-        // Load the selected song
-        function loadSong(index) {
-            const song = songs[index];
-            audioPlayer.src = song.getAttribute('data-src');
-
-            // Highlight the current song
-            songs.forEach(s => s.classList.remove('current-song'));
-            song.classList.add('current-song');
+        // Hide all elements with class="tabcontent" by default */
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
         }
 
-        // Play the selected song
-        function playSong(index) {
-            loadSong(index);
-            audioPlayer.play();
+        // Remove the background color of all tablinks/buttons
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
         }
 
-        // Add click functionality to playlist items
-        playlist.addEventListener('click', (e) => {
-            const target = e.target.closest('li'); // Ensure only <li> is clickable
-            if (target) {
-                currentSongIndex = songs.indexOf(target);
-                playSong(currentSongIndex);
-            }
+        // Show the specific tab content
+        document.getElementById(pageName).style.display = "block";
+
+        // Add the specific color to the button used to open the tab content
+        elmnt.style.backgroundColor = color;
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+
+        
+
+
+        const disclaimer = document.getElementById('disclaimer');
+        const content = document.getElementById('main-content');
+
+        disclaimer.addEventListener('click', () => {
+        disclaimer.classList.add('hide-disclaimer');
+        document.body.style.overflow = 'auto';
+
+        setTimeout(() => {
+        disclaimer.style.display = 'none';
+        content.style.display = 'block';
+        }, 600); // match the animation time
         });
 
-        // Initialize the first song
-        loadSong(currentSongIndex);
+
+          const playlistItems = document.querySelectorAll('#playlist li');
+  const progressBar = document.getElementById('progressBar');
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  const audio = new Audio();
+  let currentIndex = 0;
+
+  function loadTrack(index) {
+    if (index < 0 || index >= playlistItems.length) return;
+    currentIndex = index;
+    const src = playlistItems[currentIndex].getAttribute('data-src');
+    audio.src = src;
+    audio.play();
+    updateButton();
+    highlightCurrent();
+  }
+
+  function updateButton() {
+    playPauseBtn.textContent = audio.paused ? '▶' : '⏸';
+  }
+
+  function highlightCurrent() {
+    playlistItems.forEach(item => item.classList.remove('current-song'));
+    playlistItems[currentIndex].classList.add('current-song');
+  }
+
+  playPauseBtn.addEventListener('click', () => {
+    if (audio.paused) audio.play();
+    else audio.pause();
+    updateButton();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) loadTrack(currentIndex - 1);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (currentIndex < playlistItems.length - 1) loadTrack(currentIndex + 1);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    progressBar.value = audio.currentTime;
+    progressBar.max = audio.duration;
+  });
+
+  progressBar.addEventListener('input', () => {
+    audio.currentTime = progressBar.value;
+  });
+
+  audio.addEventListener('ended', () => {
+    if (currentIndex < playlistItems.length - 1) loadTrack(currentIndex + 1);
+  });
+
+  playlistItems.forEach((item, index) => {
+    item.addEventListener('click', () => {
+      loadTrack(index);
+    });
+  });
+
+  // Load first track
+  if (playlistItems.length > 0) loadTrack(0);
+
+  document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+      player.style.left = `${e.clientX - offsetX}px`;
+      player.style.top = `${e.clientY - offsetY}px`;
+    }
+  });
+
+  function nextTrack() {
+  currentTrack = (currentTrack + 1) % playlist.length;
+  loadTrack(currentTrack);
+}
+
+function prevTrack() {
+  currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+  loadTrack(currentTrack);
+}
     </script>
 
+    
+    
 </body>
 </html>
